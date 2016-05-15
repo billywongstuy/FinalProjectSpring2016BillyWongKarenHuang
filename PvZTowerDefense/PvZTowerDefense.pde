@@ -1,3 +1,5 @@
+import java.util.*;
+
 //font is Series Orbit
 Square [][] area = new Square[68][68];
 PImage map;
@@ -27,7 +29,7 @@ for (int i = 0; i < area.length; i++) {
 */
 
 void setup() {
-  size(900,900);
+  size(800,800);
   fillField();
   noStroke();
   map = loadImage("../map.png");
@@ -39,8 +41,10 @@ void setup() {
 
 
 void draw() {
+  image(map,0,0);
   deselect();  
+  dragPlant();
   surroundChoice();
-
+  displayPlanted();
   
 }

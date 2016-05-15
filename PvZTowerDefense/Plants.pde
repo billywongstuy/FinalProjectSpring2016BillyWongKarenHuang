@@ -4,6 +4,7 @@ abstract class Plant {
  double rate; //1 per how many seconds
  int power;
  double range;//radius of range
+ double sRange;
  int xsize;
  int ysize;
  String name;
@@ -20,6 +21,7 @@ abstract class Plant {
    xsize = 5;
    ysize = 5;
    name = n;
+   sRange = range*10;
  }
  
 }

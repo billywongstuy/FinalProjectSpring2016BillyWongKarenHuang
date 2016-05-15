@@ -95,33 +95,78 @@ void fillField() {
     }
   }
   
-  for (Square row[]: area) {
-    for (Square spot: row) {
-      if (spot == null) {
-        spot = new Soil();  
+  for (int i = 0 ; i < 68; i++) {
+    for (int j = 0; j < 68; j++) {
+      if (area[i][j] == null) {
+        area[i][j] = new Soil();  
       }
     }
   }
   
+  //System.out.println(Arrays.deepToString(area));  
 }
 
 
 abstract class Square {
-  
+  Plant getPlant() {return null;};
+  ArrayList<Zombie> getZombies() {return null;};
+  boolean placePlant(Plant p) {return false;};
+  void setPlant(Plant p) {};
+  void setZombies() {};
 }
 
 class Road extends Square {
   ArrayList<Zombie>zombiesHere = new ArrayList<Zombie>();
   int numberSpikes = 0;
+  
+  ArrayList<Zombie> getZombies() {
+    return zombiesHere;  
+  }
+  
 }
 
 
 class Soil extends Square {
-  ArrayList<Plant>plantHere = new ArrayList<Plant>();
+  Plant plantHere;
+  
+  void setPlant(Plant p) {
+    plantHere = p;  
+  }
   
   boolean placePlant(Plant p) {
-    //make the 5x5 squares fill with it
-    //round the mouse coordinate
-    return false;  
+    int row = mouseY/10;
+    int col = mouseX/10;
+    for (int i = row-1; i < row+1 & i < 68; i++) {
+      for (int j = col-1; j < col+1 && j < 68; j++) {
+        area[i][j].setPlant(plantChosen);  
+      }
+    }
+    planted.add(new Crop(plantHere,row,col));
+    return true;
+  }
+  
+  Plant getPlant() {
+    return plantHere;    
+  }
+}
+
+ArrayList<Crop>planted = new ArrayList<Crop>();
+
+class Crop {
+  int row;
+  int col;
+  Plant p;
+  
+  public Crop(Plant pea, int r, int c) {
+    row = r;
+    col = c;
+    p = pea;
+  }
+}
+
+void displayPlanted() {
+  for (Crop c: planted) {
+    fill(color(0,0,0));
+    ellipse(c.col*10,c.row*10,30,30);  
   }
 }

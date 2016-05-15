@@ -38,11 +38,16 @@ void surroundChoice() {
 }
 
 void mouseClicked() {
-  if (mouseX >= 685 && mouseX <= 788 && mouseY >=81 && mouseY <= 390) {
+  if (mouseX >= 685 && mouseX <= 788 && mouseY >= 81 && mouseY <= 390) {
     selectPlant();  
   }
   else if (mouseX >= 670 && mouseY >= 396 && mouseY <= 690) {
     fadeOut();
+  }
+  else if (plantChosen != null) {
+    System.out.println(area[mouseY/10][mouseX/10]);
+    area[mouseY/10][mouseX/10].placePlant(plantChosen); 
+    plantChosen = null;
   }
 }
 
@@ -101,6 +106,43 @@ void selectPlant() {
 
 void dragPlant() {
   if (plantChosen != null) {
-      
+    
+    float radius = (float)(plantChosen.sRange);
+    System.out.println(radius);
+    
+    if (validLocation()) {fill(color(0,0,0,100));} else {fill(255,0,0,100);}
+    stroke(0);
+    ellipse(mouseX,mouseY,radius,radius);
+    ellipse(mouseX,mouseY,30,30);
+    //sload specific images based on where the mouse is
+    //image(map,0,0,(int)(mouseX-radius/2),800,0,0,(int)(mouseX-radius/2),800);
+    //image(map,0,0,800,(int)(mouseY-radius/2),0,0,800,(int)(mouseY-radius/2));
+    //issue with 2 lines below
+    //to the right
+    //image(map,(int)(mouseX+radius/2),0,800,800,(int)(mouseX+radius/2),0,800,800);
+    //image(map,0,(int)(mouseY+radius/2),800,(int)(800-mouseY-radius/2),0,(int)(mouseY+radius/2),800,(int)(800-mouseY-radius/2));
+    surroundActive = false;
+    
+    
   }
+}
+
+
+boolean validLocation() {
+  int col = mouseX/10;
+  int row = mouseY/10;
+  System.out.println(mouseX + "," + mouseY);
+  for (int i = row-1; i <= row+1 && i < 68; i++) {
+    for (int j = col-1; j <= col+1 && j < 68; j++) {
+      //need a case for spikeweed later
+      try {
+        if (area[i][j] instanceof Road || (area[i][j] instanceof Soil && area[i][j].getPlant() != null)) {
+          return false;  
+        }
+      }
+      catch (Exception e) {}
+    }
+  }
+  
+  return true;
 }
