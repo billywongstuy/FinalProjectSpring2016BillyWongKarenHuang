@@ -113,7 +113,11 @@ void dragPlant() {
     if (validLocation()) {fill(color(0,0,0,100));} else {fill(255,0,0,100);}
     stroke(0);
     ellipse(mouseX,mouseY,radius,radius);
-    ellipse(mouseX,mouseY,30,30);
+    PImage p = loadImage("../Plants/" + plantChosen.name + "1.png");
+    image(p,mouseX-15,mouseY-15);
+    //ellipse(mouseX,mouseY,30,30);
+    
+    
     //sload specific images based on where the mouse is
     //image(map,0,0,(int)(mouseX-radius/2),800,0,0,(int)(mouseX-radius/2),800);
     //image(map,0,0,800,(int)(mouseY-radius/2),0,0,800,(int)(mouseY-radius/2));

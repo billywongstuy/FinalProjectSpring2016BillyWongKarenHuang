@@ -167,6 +167,8 @@ class Crop {
 void displayPlanted() {
   for (Crop c: planted) {
     fill(color(0,0,0));
-    ellipse(c.col*10,c.row*10,30,30);  
+    //ellipse(c.col*10,c.row*10,30,30); 
+    PImage photo= loadImage("../Plants/" + c.p.name + "1.png");
+    image(photo,c.col*10,c.row*10);
   }
 }

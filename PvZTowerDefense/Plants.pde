@@ -107,7 +107,7 @@ class Repeater extends Plant{
 
 class Sunflower extends Plant{  
   public Sunflower() {
-    super(150,3,0,0,"Sunflower");     
+    super(150,3,0,5,"Sunflower");     
   } 
   
   void attack() {
