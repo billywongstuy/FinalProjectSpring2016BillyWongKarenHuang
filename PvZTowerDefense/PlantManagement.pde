@@ -44,10 +44,11 @@ void mouseClicked() {
   else if (mouseX >= 670 && mouseY >= 396 && mouseY <= 690) {
     fadeOut();
   }
-  else if (plantChosen != null) {
-    System.out.println(area[mouseY/10][mouseX/10]);
+  else if (plantChosen != null && validLocation()) {
     area[mouseY/10][mouseX/10].placePlant(plantChosen); 
-    plantChosen = null;
+    if (!(plantChosen instanceof Spikeweed)) {
+      plantChosen = null;
+    }
   }
 }
 
@@ -138,10 +139,20 @@ boolean validLocation() {
   System.out.println(mouseX + "," + mouseY);
   for (int i = row-1; i <= row+1 && i < 68; i++) {
     for (int j = col-1; j <= col+1 && j < 68; j++) {
-      //need a case for spikeweed later
       try {
-        if (area[i][j] instanceof Road || (area[i][j] instanceof Soil && area[i][j].getPlant() != null)) {
-          return false;  
+        if (!(plantChosen instanceof Spikeweed)) { 
+          if (area[i][j] instanceof Road || (area[i][j] instanceof Soil && area[i][j].getPlant() != null)) {
+            return false;  
+          }
+        }
+        else {
+          for (int k = row-1; k <= row+1; k++) {
+            for (int l = col-1; l <= col+1; l++) {
+              if (!(area[i][j] instanceof Road)) {
+                return false;  
+              }
+            }
+          }
         }
       }
       catch (Exception e) {}

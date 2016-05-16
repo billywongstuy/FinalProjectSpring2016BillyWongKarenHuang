@@ -122,7 +122,7 @@ class Sunflower extends Plant{
 
 class Spikeweed extends Plant{  
   public Spikeweed() {
-    super(150,0,1,0,"Spikeweed");     
+    super(150,0,1,5,"Spikeweed");     
   } 
   
   void attack() {

@@ -123,6 +123,25 @@ class Road extends Square {
     return zombiesHere;  
   }
   
+  void setPlant(Plant p) {
+    numberSpikes++;    
+  }
+  
+  boolean placePlant(Plant p) {
+    if (!validLocation()) {
+      return false;  
+    }
+    int row = mouseY/10;
+    int col = mouseX/10;
+    for (int i = row-1; i < row+1 & i < 68; i++) {
+      for (int j = col-1; j < col+1 && j < 68; j++) {
+        area[i][j].setPlant(p); 
+      }
+    }
+    planted.add(new Crop(p,row,col));
+    return true;
+  }
+  
 }
 
 
@@ -134,6 +153,9 @@ class Soil extends Square {
   }
   
   boolean placePlant(Plant p) {
+    if (!validLocation()) {
+      return false;  
+    }
     int row = mouseY/10;
     int col = mouseX/10;
     for (int i = row-1; i < row+1 & i < 68; i++) {
@@ -166,7 +188,7 @@ class Crop {
 
 void displayPlanted() {
   for (Crop c: planted) {
-    fill(color(0,0,0));
+    //fill(color(0,0,0));
     //ellipse(c.col*10,c.row*10,30,30); 
     PImage photo= loadImage("../Plants/" + c.p.name + "1.png");
     image(photo,c.col*10,c.row*10);

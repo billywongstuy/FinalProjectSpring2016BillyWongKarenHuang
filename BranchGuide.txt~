@@ -1,0 +1,20 @@
+https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+
+# Making a Branch #
+
+git branch -b [name of branch]
+    -to make a new branch and switch to it
+
+OR
+
+git branch [name of branch]
+git checkout [name of branch]
+
+
+
+# Making Changes #
+
+-Make your changes
+-Commit as normal
+-Push as normal
+

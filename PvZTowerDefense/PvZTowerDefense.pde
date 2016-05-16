@@ -8,7 +8,7 @@ PImage field;
 Plant plantChosen = null;
 boolean surroundActive;
 //Treat the rows as y and cols as x for animation
-
+PImage tester;
 
 //testing 
 /*
@@ -36,15 +36,16 @@ void setup() {
   bar = loadImage("../Plants/plantsbar.png");
   field = loadImage("../field.png");
   image(map,0,0);
+  tester = loadImage("../Plants/Spikeweed1.png");
  
 }
 
 
 void draw() {
   image(map,0,0);
+  displayPlanted();
   deselect();  
   dragPlant();
   surroundChoice();
-  displayPlanted();
   
 }
