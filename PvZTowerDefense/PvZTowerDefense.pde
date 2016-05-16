@@ -5,11 +5,12 @@ Square [][] area = new Square[68][68];
 PImage map;
 PImage bar;
 PImage field;
+PFont text;
 Plant plantChosen = null;
 boolean surroundActive;
 //Treat the rows as y and cols as x for animation
-PImage tester;
-
+int sun = 300;
+int health = 200;
 //testing 
 /*
 fill(color(161,119,79));
@@ -36,13 +37,15 @@ void setup() {
   bar = loadImage("../Plants/plantsbar.png");
   field = loadImage("../field.png");
   image(map,0,0);
-  tester = loadImage("../Plants/Spikeweed1.png");
- 
+  text = loadFont("Serif.plain-18.vlw");
+  textFont(text);
 }
 
 
 void draw() {
   image(map,0,0);
+  fill(color(0,0,0));
+  text(sun,686,68);
   displayPlanted();
   deselect();  
   dragPlant();
