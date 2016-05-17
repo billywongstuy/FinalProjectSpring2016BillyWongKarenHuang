@@ -37,7 +37,7 @@ void setup() {
   bar = loadImage("../Plants/plantsbar.png");
   field = loadImage("../field.png");
   image(map,0,0);
-  text = loadFont("Serif.plain-18.vlw");
+  text = loadFont("SeriesOrbit-16.vlw");
   textFont(text);
 }
 

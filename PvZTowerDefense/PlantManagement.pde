@@ -8,7 +8,6 @@ void makeRectangle(int x1, int y1, int x2, int y2) {
 
 void surroundChoice() {
   if (plantChosen != null && !surroundActive) {
-    image(bar,670,0);
     if (plantChosen instanceof Peashooter) {
       makeRectangle(685,81,733,147);    
     }
