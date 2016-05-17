@@ -142,6 +142,10 @@ class Road extends Square {
     return true;
   }
   
+  void setZombies(){
+  
+  }
+  
 }
 
 
@@ -173,6 +177,7 @@ class Soil extends Square {
 }
 
 ArrayList<Crop>planted = new ArrayList<Crop>();
+ArrayList<Zombie>alive = new ArrayList<Zombie>();
 
 class Crop {
   int row;
@@ -192,5 +197,12 @@ void displayPlanted() {
     //ellipse(c.col*10,c.row*10,30,30); 
     PImage photo= loadImage("../Plants/" + c.p.name + "1.png");
     image(photo,c.col*10,c.row*10);
+  }
+}
+
+void displayZombies(){
+  for(Zombie z: alive){
+   PImage photo = loadImage("../Zombies/" + z.getType() + ".png");
+   image(photo,z.getCoords()[0],z.getCoords()[1]);
   }
 }
