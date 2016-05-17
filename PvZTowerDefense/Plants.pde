@@ -11,6 +11,7 @@ abstract class Plant {
  String letter;
  int x;
  int y;
+ double counter;
 
  void attack() {};
  void applyEffects() {};
@@ -33,6 +34,14 @@ abstract class Plant {
   void setY() {
     y = mouseY;  
   }
+  
+  void setX(int X) {
+    x = X*10+15;  
+  }
+  
+  void setY(int Y) {
+    y = Y*10+15;  
+  }
  
 }
 
@@ -43,6 +52,11 @@ class Peashooter extends Plant{
   } 
   
   void attack() {
+    //if counter > 0
+    //set counter - (n)
+    
+    //closest zombie to end take damage  
+    //then set counter to rate
     
   }
   

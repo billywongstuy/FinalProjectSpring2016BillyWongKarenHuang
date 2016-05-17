@@ -158,10 +158,10 @@ class Soil extends Square {
     if (!validLocation()) {
       return false;  
     }
-    p.setX();
-    p.setY();
     int row = (mouseY-15)/10;
     int col = (mouseX-15)/10;
+    p.setX(col);
+    p.setY(row);
     for (int i = row; i <= row+2 & i < 68; i++) {
       for (int j = col; j <= col+2 && j < 68; j++) {
         area[i][j].setPlant(plantChosen);  
