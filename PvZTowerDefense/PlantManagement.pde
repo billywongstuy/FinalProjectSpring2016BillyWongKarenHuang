@@ -36,21 +36,6 @@ void surroundChoice() {
   }
 }
 
-void mouseClicked() {
-  if (mouseX >= 685 && mouseX <= 788 && mouseY >= 81 && mouseY <= 390) {
-    selectPlant();  
-  }
-  else if (mouseX >= 670 && mouseY >= 396 && mouseY <= 690) {
-    fadeOut();
-  }
-  else if (plantChosen != null && validLocation()) {
-    area[mouseY/10][mouseX/10].placePlant(plantChosen); 
-    if (!(plantChosen instanceof Spikeweed)) {
-      plantChosen = null;
-    }
-  }
-}
-
 void deselect() {
   //key == backspace
   if (plantChosen != null) {
@@ -148,4 +133,13 @@ boolean validLocation() {
     }
   }
   return true;
+}
+
+void showPlant() {
+  if (plantShowing != null) {
+    float x = (float)(plantShowing.range*10);
+    fill(color(128,128,128,100));
+    //need to fix the circle here for the coordinates
+    ellipse(plantShowing.x,plantShowing.y,x,x);  
+  }
 }

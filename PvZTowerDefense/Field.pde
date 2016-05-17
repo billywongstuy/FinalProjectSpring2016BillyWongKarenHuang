@@ -131,6 +131,8 @@ class Road extends Square {
     if (!validLocation()) {
       return false;  
     }
+    p.setX();
+    p.setY();
     int row = mouseY/10;
     int col = mouseX/10;
     for (int i = row-1; i < row+1 & i < 68; i++) {
@@ -156,16 +158,17 @@ class Soil extends Square {
     if (!validLocation()) {
       return false;  
     }
-    System.out.println(p);
+    p.setX();
+    p.setY();
     int row = (mouseY-15)/10;
     int col = (mouseX-15)/10;
-    for (int i = row-1; i < row+1 & i < 68; i++) {
-      for (int j = col-1; j < col+1 && j < 68; j++) {
+    for (int i = row; i <= row+2 & i < 68; i++) {
+      for (int j = col; j <= col+2 && j < 68; j++) {
         area[i][j].setPlant(plantChosen);  
       }
     }
-    System.out.println(plantHere);
     planted.add(new Crop(p,row,col));
+    System.out.println("Planted at " + row + "," + col);
     return true;
   }
   
@@ -194,9 +197,6 @@ void displayPlanted() {
     //rect(c.col*10,c.row*10,30,30);
     ellipse(c.col*10+15,c.row*10+15,30,30); 
     fill(color(255,255,255));
-    System.out.println("lslsl");
-    System.out.println(c);
-    System.out.println(c.p);
     text(c.p.letter,c.col*10+15,c.row*10+15);
     //PImage photo= loadImage("../Plants/" + c.p.name + "1.png");
     //image(photo,c.col*10,c.row*10);

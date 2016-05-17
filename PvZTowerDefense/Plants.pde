@@ -9,6 +9,8 @@ abstract class Plant {
  int ysize;
  String name;
  String letter;
+ int x;
+ int y;
 
  void attack() {};
  void applyEffects() {};
@@ -23,6 +25,14 @@ abstract class Plant {
    name = n;
    sRange = range*10;
  }
+ 
+  void setX() {
+    x = mouseX;  
+  }
+  
+  void setY() {
+    y = mouseY;  
+  }
  
 }
 
