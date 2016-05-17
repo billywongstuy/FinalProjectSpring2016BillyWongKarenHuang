@@ -156,14 +156,16 @@ class Soil extends Square {
     if (!validLocation()) {
       return false;  
     }
-    int row = mouseY/10;
-    int col = mouseX/10;
+    System.out.println(p);
+    int row = (mouseY-15)/10;
+    int col = (mouseX-15)/10;
     for (int i = row-1; i < row+1 & i < 68; i++) {
       for (int j = col-1; j < col+1 && j < 68; j++) {
         area[i][j].setPlant(plantChosen);  
       }
     }
-    planted.add(new Crop(plantHere,row,col));
+    System.out.println(plantHere);
+    planted.add(new Crop(p,row,col));
     return true;
   }
   
@@ -188,9 +190,16 @@ class Crop {
 
 void displayPlanted() {
   for (Crop c: planted) {
-    //fill(color(0,0,0));
-    //ellipse(c.col*10,c.row*10,30,30); 
-    PImage photo= loadImage("../Plants/" + c.p.name + "1.png");
-    image(photo,c.col*10,c.row*10);
+    fill(color(0,0,0));
+    //rect(c.col*10,c.row*10,30,30);
+    ellipse(c.col*10+15,c.row*10+15,30,30); 
+    fill(color(255,255,255));
+    System.out.println("lslsl");
+    System.out.println(c);
+    System.out.println(c.p);
+    text(c.p.letter,c.col*10+15,c.row*10+15);
+    //PImage photo= loadImage("../Plants/" + c.p.name + "1.png");
+    //image(photo,c.col*10,c.row*10);
+    
   }
 }
