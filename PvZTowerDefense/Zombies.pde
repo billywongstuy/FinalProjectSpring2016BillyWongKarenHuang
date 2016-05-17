@@ -4,7 +4,7 @@ abstract class Zombie {
   String type;
   String[]special;
   int gain; //sun yield
-  int[] coords;
+  int[] coords = new int[2];
   
   public Zombie(int s, int h, String t, String[] sp, int g){
     speed = s;

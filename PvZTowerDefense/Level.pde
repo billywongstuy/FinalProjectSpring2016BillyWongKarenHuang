@@ -21,6 +21,7 @@ class Level{
    for(int i = 0;i < n;i++){
      zombies.add(z);
    }
+  }
 }
 void setupLevels(){
   Level Level1 = new Level();
