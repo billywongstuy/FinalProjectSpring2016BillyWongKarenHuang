@@ -47,5 +47,5 @@ void draw() {
   deselect();  
   dragPlant();
   surroundChoice();
-  
+  setupLevels();
 }
