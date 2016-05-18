@@ -1,19 +1,22 @@
 void fillField() {
+  int start = 0;
+  
   for (int i = 0; i < 22; i++) {
     for (int j = 56; j < 62; j++) {
       area[i][j] = new Road();
     }
   }
   
-  for (int a = 13; a < 22; a++) {
-    for (int b = 46; b < 52; b++) {
-       area[a][b] = new Road(); 
+  
+  for (int c = 16; c < 22; c++) {
+    for (int d = 55; d >= 52; d--) {
+       area[c][d] = new Road(); 
     }
   }
   
-  for (int c = 16; c < 22; c++) {
-    for (int d = 52; d < 56; d++) {
-       area[c][d] = new Road(); 
+  for (int a = 13; a < 22; a++) {
+    for (int b = 46; b < 52; b++) {
+       area[a][b] = new Road(); 
     }
   }
   
@@ -118,6 +121,14 @@ abstract class Square {
 class Road extends Square {
   ArrayList<Zombie>zombiesHere = new ArrayList<Zombie>();
   int numberSpikes = 0;
+  int startDistance = 0;
+  
+  
+  public Road() {}
+  
+  public Road(int i) {
+    startDistance = i;
+  }
   
   ArrayList<Zombie> getZombies() {
     return zombiesHere;  
