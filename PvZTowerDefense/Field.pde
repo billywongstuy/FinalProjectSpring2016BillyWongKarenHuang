@@ -232,12 +232,8 @@ abstract class Square {
   ArrayList<Zombie> getZombies() {return null;};
   boolean placePlant(Plant p) {return false;};
   void setPlant(Plant p) {};
-<<<<<<< HEAD
   void setZombies(Zombie z) {};
-=======
-  void setZombies() {};
   Square next() {return null;};
->>>>>>> origin/master
 }
 
 class Road extends Square {

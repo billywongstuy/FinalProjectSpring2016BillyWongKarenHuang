@@ -30,7 +30,9 @@ abstract class Zombie {
   
   void move(){};
   
-  int[] nextSpace(){
+  
+  //UNCOMMENT!
+/*  int[] nextSpace(){
     if(56 <= coords[0] && coords[0] <= 62 && 0 <= coords[1] && coords[1] <= 19){
       return new int[]{coords[0],coords[1] + 1};
     }
@@ -49,7 +51,7 @@ abstract class Zombie {
     else if(6 <= coords[0] && coords[0] <= 21 && 31 <= coords[1] && coords[1] <= 37){
       return new int[]{coords[0] + 1,coords[1]};
     }
-  }
+  }*/
 }
 
 class Normal extends Zombie{

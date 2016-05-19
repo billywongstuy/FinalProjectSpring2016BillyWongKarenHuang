@@ -52,9 +52,7 @@ void draw() {
   deselect();  
   dragPlant();
   surroundChoice();
-<<<<<<< HEAD
   setupLevels();
-=======
 }
 
 void mouseClicked() {
@@ -89,5 +87,4 @@ void mouseClicked() {
   else if (plantShowing != null && area[mouseY/10][mouseX/10].getPlant() != null && area[mouseY/10][mouseX/10].getPlant() != plantShowing) {
       plantShowing = area[mouseY/10][mouseX/10].getPlant(); 
   }
->>>>>>> origin/master
 }
