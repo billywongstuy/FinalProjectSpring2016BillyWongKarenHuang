@@ -44,7 +44,7 @@ abstract class Plant {
   }
  
  
-  Zombie findNearestZombie() {
+  /*Zombie findNearestZombie() {
     float distance = INTEGER.MAX_VALUE;
     Zombie z = null;
     for (int i = 0; i <= range*2; i++) {
@@ -57,7 +57,7 @@ abstract class Plant {
         }        
       }
     }
-  }
+  }*/
  
 }
 

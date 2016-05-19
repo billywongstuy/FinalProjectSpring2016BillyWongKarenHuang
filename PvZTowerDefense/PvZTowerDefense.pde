@@ -23,6 +23,23 @@ void setup() {
   image(map,0,0);
   text = loadFont("SeriesOrbit-16.vlw");
   textFont(text);
+  /*textSize(12);
+  for (int i = 0; i < area.length; i++) {
+    for (int j = 0; j < area[i].length; j++) {
+      
+      if (area[i][j] != null && area[i][j].getClass() == new Road().getClass()) {
+        fill(color(161,119,79));
+        rect(j*10,i*10,10,10);
+        fill(color(0));
+        if (area[i][j].startDistance != 0) {
+        text((area[i][j].startDistance)%10,j*10,(i*10+10));
+        }
+      }
+    }
+  }
+  System.out.println(path.size());
+  //rect(480,120,10,10);*/
+  
 }
 
 
