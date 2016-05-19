@@ -8,7 +8,6 @@ void makeRectangle(int x1, int y1, int x2, int y2) {
 
 void surroundChoice() {
   if (plantChosen != null && !surroundActive) {
-    image(bar,670,0);
     if (plantChosen instanceof Peashooter) {
       makeRectangle(685,81,733,147);    
     }
@@ -34,21 +33,6 @@ void surroundChoice() {
       makeRectangle(740,324,788,390);    
     }
     surroundActive = true;
-  }
-}
-
-void mouseClicked() {
-  if (mouseX >= 685 && mouseX <= 788 && mouseY >= 81 && mouseY <= 390) {
-    selectPlant();  
-  }
-  else if (mouseX >= 670 && mouseY >= 396 && mouseY <= 690) {
-    fadeOut();
-  }
-  else if (plantChosen != null && validLocation()) {
-    area[mouseY/10][mouseX/10].placePlant(plantChosen); 
-    if (!(plantChosen instanceof Spikeweed)) {
-      plantChosen = null;
-    }
   }
 }
 
@@ -106,29 +90,19 @@ void selectPlant() {
 
 
 void dragPlant() {
-  if (plantChosen != null) {
-    
+  if (plantChosen != null) {   
     float radius = (float)(plantChosen.sRange);
     System.out.println(radius);
     
     if (validLocation()) {fill(color(0,0,0,100));} else {fill(255,0,0,100);}
     stroke(0);
     ellipse(mouseX,mouseY,radius,radius);
-    PImage p = loadImage("../Plants/" + plantChosen.name + "1.png");
-    image(p,mouseX-15,mouseY-15);
-    //ellipse(mouseX,mouseY,30,30);
-    
-    
-    //sload specific images based on where the mouse is
-    //image(map,0,0,(int)(mouseX-radius/2),800,0,0,(int)(mouseX-radius/2),800);
-    //image(map,0,0,800,(int)(mouseY-radius/2),0,0,800,(int)(mouseY-radius/2));
-    //issue with 2 lines below
-    //to the right
-    //image(map,(int)(mouseX+radius/2),0,800,800,(int)(mouseX+radius/2),0,800,800);
-    //image(map,0,(int)(mouseY+radius/2),800,(int)(800-mouseY-radius/2),0,(int)(mouseY+radius/2),800,(int)(800-mouseY-radius/2));
-    surroundActive = false;
-    
-    
+    //PImage p = loadImage("../Plants/" + plantChosen.name + "1.png");
+    //image(p,mouseX-15,mouseY-15);
+    fill(color(128,128,128));
+    ellipse(mouseX,mouseY,30,30);
+    text(plantChosen.letter,mouseX,mouseY);
+    surroundActive = false;   
   }
 }
 
@@ -158,6 +132,17 @@ boolean validLocation() {
       catch (Exception e) {}
     }
   }
-  
   return true;
 }
+
+void showPlant() {
+  if (plantShowing != null) {
+    float x = (float)(plantShowing.range*10);
+    fill(color(128,128,128,100));
+    //need to fix the circle here for the coordinates
+    ellipse(plantShowing.x,plantShowing.y,x,x);  
+  }
+}
+
+
+//ellipse(c.col*10+15,c.row*10+15,30,30); 

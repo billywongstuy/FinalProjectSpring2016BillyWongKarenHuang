@@ -1,97 +1,216 @@
+ArrayList<Square>path = new ArrayList<Square>();
+
 void fillField() {
+  int start = 1;
+  
   for (int i = 0; i < 22; i++) {
-    for (int j = 56; j < 62; j++) {
-      area[i][j] = new Road();
+    for (int j = 56; j < 61; j++) {
+      if (j == 58 && i <= 19) {
+        area[i][j] = new Road(start);   
+        path.add(area[i][j]);
+        start++;
+      }
+      else {
+        area[i][j] = new Road();  
+      }
     }
   }
   
-  for (int a = 13; a < 22; a++) {
-    for (int b = 46; b < 52; b++) {
-       area[a][b] = new Road(); 
+  
+  //d from 510-560
+  for (int c = 17; c < 22; c++) {
+    for (int d = 57; d >= 49; d--) {
+      if (c == 19) {  
+         area[c][d] = new Road(start); 
+         path.add(area[c][d]);
+         start++;
+      }
+      else {
+        area[c][d] = new Road();  
+      }
     }
   }
   
-  for (int c = 16; c < 22; c++) {
-    for (int d = 52; d < 56; d++) {
-       area[c][d] = new Road(); 
+  //a from 21 to 12
+  for (int a = 21; a >= 10; a--) {
+    for (int b = 46; b < 51; b++) {
+      if (b == 48 && a <= 19 && a >= 9) {
+       area[a][b] = new Road(start);
+       path.add(area[a][b]);
+       start++;
+      }
+      else {
+        area[a][b] = new Road();  
+      }
     }
   }
   
-  for (int k = 7; k < 13; k++) {
-    for (int l = 6; l < 52; l++) {
-      area[k][l] = new Road();
+  for (int k = 11; k >= 7; k--) {
+    for (int l = 50; l >= 6; l--) {
+      if (k == 9 && l <= 48 && l >= 8) {
+        area[k][l] = new Road(start);
+        path.add(area[k][l]);
+        start++;
+      }
+      else {
+        area[k][l] = new Road();    
+      }
     }
   }
   
-  for (int e = 13; e < 37; e++) {
-    for (int f = 6; f < 12; f++) {
-      area[e][f] = new Road();
+  for (int e = 10; e < 36; e++) {
+    for (int f = 6; f < 11; f++) {
+      if (f == 8 && e <= 33) { 
+        area[e][f] = new Road(start);
+        path.add(area[e][f]);
+        start++;
+      }
+      else {
+        area[e][f] = new Road();  
+      }
     }
   }
   
-  for (int g = 31; g < 37; g++) {
-    for (int h = 12; h < 24; h++) {
-       area[g][h] = new Road(); 
+  for (int g = 31; g < 36; g++) {
+    for (int h = 9; h < 23; h++) {
+       if (g == 33 && h <= 20) { 
+        area[g][h] = new Road(start);
+        path.add(area[g][h]);
+        start++;
+      }
+      else {
+        area[g][h] = new Road();  
+      }
     }
   }
   
-  for (int m = 21; m < 31; m++) {
-    for (int n = 18; n < 24; n++) {
-      area[m][n] = new Road();
+  for (int m = 32; m >= 22; m--) {
+    for (int n = 18; n < 23; n++) {
+      if (n == 20 && m >= 24) { 
+        area[m][n] = new Road(start);
+        path.add(area[m][n]);
+        start++;
+      }
+      else {
+        area[m][n] = new Road();  
+      }
     }
   }
   
-  for (int o = 21; o < 27; o++) {
-    for (int p = 24; p < 41; p++) {
-      area[o][p] = new Road();  
+  for (int o = 22; o < 27; o++) {
+    for (int p = 21; p < 40; p++) {
+      if (o == 24 && p <= 37) { 
+        area[o][p] = new Road(start);
+        path.add(area[o][p]);
+        start++;
+      }
+      else {
+        area[o][p] = new Road();  
+      }
     }
   }
   
-  for (int q = 27; q < 51; q++) {
-    for (int r = 35; r < 41; r++) {
-      area[q][r] = new Road();
+  for (int q = 25; q < 50; q++) {
+    for (int r = 35; r < 40; r++) {
+      if (r == 37 && q <= 47) { 
+        area[q][r] = new Road(start);
+        path.add(area[q][r]);
+        start++;
+      }
+      else {
+        area[q][r] = new Road();  
+      }
     }
   }
   
-  for (int s = 45; s < 51; s++) {
-    for (int t = 41; t < 51; t++) {
-      area[s][t] = new Road();
+  for (int s = 45; s < 50; s++) {
+    for (int t = 38; t < 51; t++) {
+      if (s == 47 && t <= 48) { 
+        area[s][t] = new Road(start);
+        path.add(area[s][t]);
+        start++;
+      }
+      else {
+        area[s][t] = new Road();  
+      }
     }
   }
   
-  for (int u = 28; u < 45; u++) {
+  for (int u = 46; u >= 28; u--) {
     for (int v = 46; v < 51; v++) {
-      area[u][v] = new Road();
+      if (v == 48 && u >= 30) { 
+        area[u][v] = new Road(start);
+        path.add(area[u][v]);
+        start++;
+      }
+      else {
+        area[u][v] = new Road();  
+      }
     }
   }
   
-  for (int w = 28; w < 34; w++) {
-    for (int x = 51; x < 62; x++) {
-      area[w][x] = new Road();    
+  for (int w = 28; w < 33; w++) {
+    for (int x = 49; x < 62; x++) {
+      if (w == 30 && x <= 59) { 
+        area[w][x] = new Road(start);
+        path.add(area[w][x]);
+        start++;
+      }
+      else {
+        area[w][x] = new Road();  
+      }
     }
   }
   
-  for (int y = 34; y < 64; y++) {
-   for (int z = 56; z < 62; z++) {
-     area[y][z] = new Road();
+  for (int y = 31; y < 63; y++) {
+   for (int z = 57; z < 62; z++) {
+     if (z == 59 && y <= 60) { 
+        area[y][z] = new Road(start);
+        path.add(area[y][z]);
+        start++;
+      }
+      else {
+        area[y][z] = new Road();  
+      }
    }
   }
   
-  for (int a1 = 58; a1 < 64; a1++) {
-    for (int b1 = 23; b1 < 56; b1++) {
-       area[a1][b1] = new Road(); 
+  for (int a1 = 58; a1 < 63; a1++) {
+    for (int b1 = 58; b1 >= 23; b1--) {
+       if (a1 == 60 && b1 >= 25) { 
+        area[a1][b1] = new Road(start);
+        path.add(area[a1][b1]);
+        start++;
+      }
+      else {
+        area[a1][b1] = new Road();  
+      }
     }
   }
   
-  for (int c1 = 47; c1 < 58; c1++) {
+  for (int c1 = 59; c1 >= 48; c1--) {
     for (int d1 = 23; d1 < 29; d1++) {
-      area[c1][d1] = new Road();
+      if (d1 == 25 && c1 >= 50) { 
+        area[c1][d1] = new Road(start);
+        path.add(area[c1][d1]);
+        start++;
+      }
+      else {
+        area[c1][d1] = new Road();  
+      }
     }
   }
   
-  for (int e1 = 47; e1 < 53; e1++) {
-    for (int f1 = 0; f1 < 23; f1++) {
-      area[e1][f1] = new Road();
+  for (int e1 = 48; e1 < 53; e1++) {
+    for (int f1 = 24; f1 >= 0; f1--) {
+      if (e1 == 50) { 
+        area[e1][f1] = new Road(start);
+        path.add(area[e1][f1]);
+        start++;
+      }
+      else {
+        area[e1][f1] = new Road();  
+      }
     }
   }
   
@@ -108,16 +227,35 @@ void fillField() {
 
 
 abstract class Square {
+  int startDistance;
   Plant getPlant() {return null;};
   ArrayList<Zombie> getZombies() {return null;};
   boolean placePlant(Plant p) {return false;};
   void setPlant(Plant p) {};
+<<<<<<< HEAD
   void setZombies(Zombie z) {};
+=======
+  void setZombies() {};
+  Square next() {return null;};
+>>>>>>> origin/master
 }
 
 class Road extends Square {
   ArrayList<Zombie>zombiesHere = new ArrayList<Zombie>();
   int numberSpikes = 0;
+  //int startDistance = 0;
+  
+  
+  public Road() {}
+  
+  public Road(int i) {
+    startDistance = i;
+  }
+  
+  
+  Square next() {
+    return path.get(startDistance+1);  
+  }
   
   ArrayList<Zombie> getZombies() {
     return zombiesHere;  
@@ -131,6 +269,8 @@ class Road extends Square {
     if (!validLocation()) {
       return false;  
     }
+    p.setX();
+    p.setY();
     int row = mouseY/10;
     int col = mouseX/10;
     for (int i = row-1; i < row+1 & i < 68; i++) {
@@ -161,14 +301,17 @@ class Soil extends Square {
     if (!validLocation()) {
       return false;  
     }
-    int row = mouseY/10;
-    int col = mouseX/10;
-    for (int i = row-1; i < row+1 & i < 68; i++) {
-      for (int j = col-1; j < col+1 && j < 68; j++) {
+    int row = (mouseY-15)/10;
+    int col = (mouseX-15)/10;
+    p.setX(col);
+    p.setY(row);
+    for (int i = row; i <= row+2 & i < 68; i++) {
+      for (int j = col; j <= col+2 && j < 68; j++) {
         area[i][j].setPlant(plantChosen);  
       }
     }
-    planted.add(new Crop(plantHere,row,col));
+    planted.add(new Crop(p,row,col));
+    System.out.println("Planted at " + row + "," + col);
     return true;
   }
   
@@ -194,10 +337,14 @@ class Crop {
 
 void displayPlanted() {
   for (Crop c: planted) {
-    //fill(color(0,0,0));
-    //ellipse(c.col*10,c.row*10,30,30); 
-    PImage photo= loadImage("../Plants/" + c.p.name + "1.png");
-    image(photo,c.col*10,c.row*10);
+    fill(color(0,0,0));
+    //rect(c.col*10,c.row*10,30,30);
+    ellipse(c.col*10+15,c.row*10+15,30,30); 
+    fill(color(255,255,255));
+    text(c.p.letter,c.col*10+15,c.row*10+15);
+    //PImage photo= loadImage("../Plants/" + c.p.name + "1.png");
+    //image(photo,c.col*10,c.row*10);
+    
   }
 }
 
