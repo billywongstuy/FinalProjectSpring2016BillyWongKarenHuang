@@ -239,8 +239,6 @@ abstract class Square {
 class Road extends Square {
   ArrayList<Zombie>zombiesHere = new ArrayList<Zombie>();
   int numberSpikes = 0;
-  //int startDistance = 0;
-  
   
   public Road() {}
   
