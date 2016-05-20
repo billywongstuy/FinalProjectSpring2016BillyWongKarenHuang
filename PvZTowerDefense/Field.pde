@@ -232,15 +232,13 @@ abstract class Square {
   ArrayList<Zombie> getZombies() {return null;};
   boolean placePlant(Plant p) {return false;};
   void setPlant(Plant p) {};
-  void setZombies() {};
+  void setZombies(Zombie z) {};
   Square next() {return null;};
 }
 
 class Road extends Square {
   ArrayList<Zombie>zombiesHere = new ArrayList<Zombie>();
   int numberSpikes = 0;
-  //int startDistance = 0;
-  
   
   public Road() {}
   
@@ -278,6 +276,11 @@ class Road extends Square {
     return true;
   }
   
+  void setZombies(Zombie z){
+    zombiesHere.add(z);
+    alive.add(z);
+  }
+  
 }
 
 
@@ -312,6 +315,7 @@ class Soil extends Square {
 }
 
 ArrayList<Crop>planted = new ArrayList<Crop>();
+ArrayList<Zombie>alive = new ArrayList<Zombie>();
 
 class Crop {
   int row;
@@ -335,5 +339,12 @@ void displayPlanted() {
     //PImage photo= loadImage("../Plants/" + c.p.name + "1.png");
     //image(photo,c.col*10,c.row*10);
     
+  }
+}
+
+void displayZombies(){
+  for(Zombie z: alive){
+   PImage photo = loadImage("../Zombies/" + z.getType() + ".png");
+   image(photo,z.getCoords()[0]*10,z.getCoords()[1]*10);
   }
 }

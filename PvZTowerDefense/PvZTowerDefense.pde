@@ -52,6 +52,7 @@ void draw() {
   deselect();  
   dragPlant();
   surroundChoice();
+  setupLevels();
 }
 
 void mouseClicked() {
@@ -75,7 +76,7 @@ void mouseClicked() {
     }
   }
   else if (plantChosen == null && plantShowing == null) {
-    if (area[mouseY/10][mouseX/10].getPlant() !=  null) {
+    if (mouseX < 680 && area[mouseY/10][mouseX/10].getPlant() !=  null) {
       plantShowing = area[mouseY/10][mouseX/10].getPlant();
       
     }
