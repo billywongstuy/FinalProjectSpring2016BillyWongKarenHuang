@@ -22,6 +22,25 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 ##Development Log##
 
+### 5/19/16 ###
+
+-Worked on what zombie plants choose
+-Worked on plant attack (basic) (not tested yet)
+
+### 5/18/16 ###
+
+-Worked on road mapping (so that zombies know where to walk)
+
+### 5/17/16 ###
+
+-Started making levels
+-Started with zombie movement and display
+
+### 5/16/16 ###
+
+-More picture editing
+-Worked on clicking on plants to view the range (and upgrades)
+
 ### 5/15/16 ###
 
 -Worked on plant placement on the map
