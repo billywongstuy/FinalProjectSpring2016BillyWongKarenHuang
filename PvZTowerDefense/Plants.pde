@@ -13,9 +13,6 @@ abstract class Plant {
  int y;
  double counter;
 
- void attack() {};
- void applyEffects() {};
- 
  public Plant(int c, double r, int p, double ra, String n) {
    cost = c;
    rate = r;
@@ -25,6 +22,7 @@ abstract class Plant {
    ysize = 5;
    name = n;
    sRange = range*10;
+   counter = rate;
  }
  
   void setX() {
@@ -44,20 +42,37 @@ abstract class Plant {
   }
  
  
-  /*Zombie findNearestZombie() {
-    float distance = INTEGER.MAX_VALUE;
+  Zombie findNearestZombie() {
+    float distance = Integer.MIN_VALUE;
     Zombie z = null;
     for (int i = 0; i <= range*2; i++) {
       for (int j = 0; j <= range*2; j++) {
-        if (area[(Y-15)/10+range-i][(X-15)/10+range-j].zombiesHere.get(0) != null) {
-          //if disrance smaller zombie = that
-          //if () {
-              
-          //}
+        int row = (int)((Y-15)/10+range-i);
+        int col = (int)((X-15)/10+range-j);
+        if (area[row][col].getZombies().get(0) != null) {
+          if (area[row][col].startDistance > distance) {
+            z = area[row][col].getZombies().get(0);
+            distance = area[row][col].startDistance;
+          }
         }        
       }
     }
-  }*/
+    return z;
+  }
+ 
+ 
+ void attack() {
+   if (counter > 0) {
+      counter -= .5;
+      findNearestZombie().takeDamage(power);
+    }
+    else {
+      counter = rate;  
+    }  
+ }
+ 
+ void applyEffects() {};
+ 
  
 }
 
@@ -67,14 +82,15 @@ class Peashooter extends Plant{
     letter = 'P';
   } 
   
-  void attack() {
+ // void attack() {
     //if counter > 0
     //set counter - (n)
     
     //closest zombie to end take damage  
     //then set counter to rate
     
-  }
+    
+  //}
   
   void applyEffects() {}
 }
@@ -86,9 +102,9 @@ class Gloomshroom extends Plant{
     letter = 'G';
   } 
   
-  void attack() {
+  //void attack() {
     
-  }
+  //}
   
   void applyEffects() {}
 }
@@ -99,9 +115,9 @@ class Melonpult extends Plant{
     letter = 'M';
   } 
   
-  void attack() {
+  //void attack() {
     
-  }
+  //}
   
   void applyEffects() {}
 }
@@ -113,9 +129,9 @@ class Bloomerang extends Plant{
     letter = 'B';
   } 
   
-  void attack() {
+  //void attack() {
     
-  }
+  //}
   
   void applyEffects() {}
 }
@@ -127,9 +143,9 @@ class SnowPea extends Plant{
     letter = 'S';
   } 
   
-  void attack() {
+  //void attack() {
     
-  }
+  //}
   
   void applyEffects() {}
 }
@@ -141,9 +157,9 @@ class Repeater extends Plant{
     letter = 'R';
   } 
   
-  void attack() {
+  //void attack() {
     
-  }
+  //}
   
   void applyEffects() {
     //4 shots
@@ -157,9 +173,9 @@ class Sunflower extends Plant{
     letter = 'F';
   } 
   
-  void attack() {
+  //void attack() {
     
-  }
+  //}
   
   void applyEffects() {
     //make sun
@@ -173,9 +189,9 @@ class Spikeweed extends Plant{
     letter = 'W';
   } 
   
-  void attack() {
+  //void attack() {
     
-  }
+  //}
   
   void applyEffects() {
     //on road
