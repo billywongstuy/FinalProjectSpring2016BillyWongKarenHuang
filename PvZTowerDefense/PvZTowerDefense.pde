@@ -11,6 +11,7 @@ Plant plantShowing = null;
 boolean surroundActive;
 int sun = 300;
 int health = 200;
+Level l1,l2,l3;
 
 
 void setup() {
@@ -39,7 +40,7 @@ void setup() {
   }
   System.out.println(path.size());
   //rect(480,120,10,10);*/
-  
+  setupLevels();
 }
 
 
@@ -52,7 +53,10 @@ void draw() {
   deselect();  
   dragPlant();
   surroundChoice();
-  setupLevels();
+  displayZombies();
+  if(frameCount % 50 == 0){
+    l1.spawn();
+  }
 }
 
 void mouseClicked() {
