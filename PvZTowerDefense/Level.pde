@@ -4,17 +4,13 @@ class Level{
    
  }
   
- Queue<Zombie>zombies= new LinkedList<Zombie>(); 
+ List<Zombie>zombies= new LinkedList<Zombie>(); 
  
  void spawn(){
    for(int i = 0;i < zombies.size();i++){
-     //display(zombies.remove());
+     area[zombies.get(i).getCoords()[0]][zombies.get(i).getCoords()[1]].setZombies(zombies.get(i));
+     zombies.get(i).move();
    }
- }
- 
- void display(Zombie z){
-   PImage photo = loadImage("../Zombies/" + z.getType() + ".png");
-   image(photo,z.getCoords()[0],z.getCoords()[1]);
  }
  
  void addZombie(int n, Zombie z){
@@ -22,13 +18,14 @@ class Level{
      zombies.add(z);
    }
   }
+
 }
 void setupLevels(){
-  Level Level1 = new Level();
-  Level1.addZombie(20, new Normal());
-  Level Level2 = new Level();
-  Level2.addZombie(30, new Normal());
-  Level Level3 = new Level();
-  Level3.addZombie(20, new Normal());
-  Level3.addZombie(5, new Cone());
+  l1 = new Level();
+  l1.addZombie(20, new Normal());
+  l2 = new Level();
+  l2.addZombie(30, new Normal());
+  l3 = new Level();
+  l3.addZombie(20, new Normal());
+  l3.addZombie(5, new Cone());
 }

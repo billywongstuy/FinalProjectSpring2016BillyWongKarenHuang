@@ -12,7 +12,7 @@ abstract class Zombie {
     type = t;
     special = sp;
     gain = g;
-    coords[0] = (int)(Math.random()*6) + 56;
+    coords[0] = 58;
     coords[1] = 0;
   }
   
@@ -28,7 +28,9 @@ abstract class Zombie {
     return coords;
   }
   
-  void move(){};
+  void move(){
+    coords = area[coords[0]][coords[1]].next().getCoords();
+  }
   
 }
 
