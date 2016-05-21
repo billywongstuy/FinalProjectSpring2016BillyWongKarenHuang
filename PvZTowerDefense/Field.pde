@@ -226,7 +226,7 @@ void fillField() {
 }
 
 
-abstract class Square {
+abstract class Square{
   int startDistance;
   int[] coords = new int[2];
   Plant getPlant() {return null;};
@@ -235,7 +235,7 @@ abstract class Square {
   void setPlant(Plant p) {};
   void setZombies(Zombie z) {};
   Square next() {return null;};
-  int[]getCoords(){return null;};
+  int[] getCoords(){return null;};
 }
 
 class Road extends Square {
