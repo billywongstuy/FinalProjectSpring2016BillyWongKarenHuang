@@ -362,6 +362,6 @@ void displayZombies(){
    fill(color(255,255,255));
    text(disp,z.coords[1]*10+5,z.coords[0]*10);
    disp++;
-   z.move();
+    z.move();
   }
 }
