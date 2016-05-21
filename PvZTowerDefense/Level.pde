@@ -6,14 +6,32 @@ class Level{
  List<Zombie>zombies= new LinkedList<Zombie>(); 
  
  void spawn(){
-   for(int j = 0;j < zombies.size();j ++){
-     area[zombies.get(j).getCoords()[0]][zombies.get(j).getCoords()[1]].setZombies(zombies.get(j));
+   //for(int i = 0;i < zombies.size();i++){
+     //area[0][58].setZombies(zombies.remove(i));
+     //area[zombies.get(i).getCoords()[0]][zombies.get(i).getCoords()[1]].setZombies(zombies.get(i));
+   //}
+   if (zombies.size() > 0) {
+     area[0][58].setZombies(zombies.remove(0));
    }
  }
  
  void addZombie(int n, Zombie z){
    for(int i = 0;i < n;i++){
-     zombies.add(z);
+     if (z instanceof Normal) {
+       zombies.add(new Normal());  
+     }
+     else if (z instanceof Cone) {
+       zombies.add(new Cone());  
+     }
+     else if (z instanceof Bucket) {
+       zombies.add(new Bucket());  
+     }
+     else if (z instanceof Football) {
+       zombies.add(new Football());  
+     }
+     else if (z instanceof Gargantuar) {
+       zombies.add(new Gargantuar());  
+     }
    }
   }
 }

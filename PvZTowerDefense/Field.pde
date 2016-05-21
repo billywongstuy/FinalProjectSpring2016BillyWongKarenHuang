@@ -355,19 +355,35 @@ void displayPlanted() {
 
 void displayZombies(){
   int disp = 0;
-  int time = 0;
-  for(Zombie z: alive){
-   if(millis() > time){
-     time = millis() + 1000;
-     System.out.println(Arrays.toString(z.coords));
-     fill(color(1,1,1));
-     ellipse(z.coords[1]*10+5,z.coords[0]*10,30,30);
-     fill(color(255,255,255));
-     text(disp,z.coords[1]*10+5,z.coords[0]*10);
-     disp++;
-     if(frameCount % 50 == 0){
-      z.move();
-     }
+  for(int i = 0; i < alive.size(); i++){
+    Zombie z = alive.get(i);
+    if (z.health < 0) {
+      alive.remove(z);  
+      i--;
     }
-   }
+    else {       
+       fill(color(1,1,1));
+       ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
+       fill(color(255,255,255));
+       text(disp,z.coords[1]*10+5,z.coords[0]*10+5);
+       disp++;
+    }
+    
+  }
+}
+
+
+void moveZombies() {
+  for (Zombie z: alive) {
+    if (frameCount % 50 == 0) {
+      System.out.println("Zombie: " + Arrays.toString(z.coords));
+      z.move();
+    }  
+  }
+}
+
+void plantsAttack() {
+  for (Crop c: planted) {
+    c.p.attack();  
+  }
 }
