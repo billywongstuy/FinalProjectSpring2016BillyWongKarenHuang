@@ -18,7 +18,6 @@ class Level{
      zombies.add(z);
    }
   }
-
 }
 void setupLevels(){
   l1 = new Level();

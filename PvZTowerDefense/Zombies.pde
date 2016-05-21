@@ -15,7 +15,6 @@ abstract class Zombie {
     coords[0] = 0;
     coords[1] = 58;
   }
-  
   void takeDamage(int h) {
     health -= h;  
   }
@@ -29,8 +28,7 @@ abstract class Zombie {
   }
   
   void move(){
-    //coords = area[coords[0]][coords[1]].next().getCoords();
-    System.out.println(area[coords[0]][coords[1]].next() instanceof Road);//next is true too
+    coords = area[coords[0]][coords[1]].next().getCoords();
   }
   
 }

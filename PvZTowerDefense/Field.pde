@@ -246,8 +246,8 @@ class Road extends Square {
   
   public Road(int i,int x,int y) {
     startDistance = i;
-    coords[0] = y;
-    coords[1] = x;
+    coords[0] = x;
+    coords[1] = y;
   }
   
   int[] getCoords(){
@@ -350,8 +350,12 @@ void displayPlanted() {
 }
 
 void displayZombies(){
+  int disp = 0;
   for(Zombie z: alive){
    fill(color(1,1,1));
-   ellipse(z.coords[0]*10,z.coords[1]*10,50,50);
+   ellipse(z.coords[1]*10,z.coords[0]*10,30,30);
+   fill(color(255,255,255));
+   text(disp,z.coords[1]*10,z.coords[0]*10);
+   disp++;
   }
 }
