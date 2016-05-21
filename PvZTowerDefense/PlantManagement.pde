@@ -1,5 +1,3 @@
-//something here to fix
-
 void makeRectangle(int x1, int y1, int x2, int y2) {
   fill(color(255,0,0));
   rect(x1,y1,x2-x1,2);
@@ -147,4 +145,8 @@ void showPlant() {
 }
 
 
+<<<<<<< HEAD
 //ellipse(c.col*10+15,c.row*10+15,30,30); 
+=======
+//ellipse(c.col*10+15,c.row*10+15,30,30);
+>>>>>>> 0a5514bacdda85b317c835a00d471e9a08d1ef5a
