@@ -23,7 +23,7 @@ void fillField() {
       if (c == 19) {  
          area[c][d] = new Road(start,c,d); 
          path.add(area[c][d]);
-         start++;
+         start++;   
       }
       else {
         area[c][d] = new Road();  
@@ -33,7 +33,7 @@ void fillField() {
   
   //a from 21 to 12
   for (int a = 21; a >= 10; a--) {
-    for (int b = 46; b < 51; b++) {
+    for (int b = 46; b < 49; b++) {
       if (b == 48 && a <= 19 && a >= 9) {
        area[a][b] = new Road(start,a,b);
        path.add(area[a][b]);
@@ -45,8 +45,12 @@ void fillField() {
     }
   }
   
+  area[9][48] = new Road(start,9,48);
+  path.add(area[9][48]);
+  start++;
+  
   for (int k = 11; k >= 7; k--) {
-    for (int l = 50; l >= 6; l--) {
+    for (int l = 47; l >= 6; l--) {
       if (k == 9 && l <= 48 && l >= 8) {
         area[k][l] = new Road(start,k,l);
         path.add(area[k][l]);
@@ -352,10 +356,12 @@ void displayPlanted() {
 void displayZombies(){
   int disp = 0;
   for(Zombie z: alive){
+   System.out.println(Arrays.toString(z.coords));
    fill(color(1,1,1));
-   ellipse(z.coords[1]*10,z.coords[0]*10,30,30);
+   ellipse(z.coords[1]*10+5,z.coords[0]*10,30,30);
    fill(color(255,255,255));
-   text(disp,z.coords[1]*10,z.coords[0]*10);
+   text(disp,z.coords[1]*10+5,z.coords[0]*10);
    disp++;
+   z.move();
   }
 }

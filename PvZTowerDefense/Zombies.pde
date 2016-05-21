@@ -28,7 +28,9 @@ abstract class Zombie {
   }
   
   void move(){
-    coords = area[coords[0]][coords[1]].next().getCoords();
+    if (area[coords[0]][coords[1]].startDistance < path.size()) {
+      coords = area[coords[0]][coords[1]].next().getCoords();
+    }
   }
   
 }

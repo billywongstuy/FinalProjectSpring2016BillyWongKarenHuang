@@ -11,7 +11,7 @@ Plant plantShowing = null;
 boolean surroundActive;
 int sun = 300;
 int health = 200;
-Level l1,l2,l3;
+Level l1,l2,l3,ltest;
 
 
 void setup() {
@@ -38,9 +38,11 @@ void setup() {
       }
     }
   }
-  System.out.println(path.size());
   //rect(480,120,10,10);*/
   setupLevels();
+  //area[19][50].startDistance = 29;
+  //area[19][49].startDistance = 29;
+  ltest.spawn();
 }
 
 
@@ -54,9 +56,12 @@ void draw() {
   dragPlant();
   surroundChoice();
   displayZombies();
-  if(frameCount % 50 == 0){
-    l1.spawn();
-  }
+  //if(frameCount % 50 == 0){
+  //  l1.spawn();
+  //}
+  //for (int i = 0; i < path.size(); i++) {
+  //  rect(path.get(i).coords[1]*10,path.get(i).coords[0]*10,10,10);  
+  //}
 }
 
 void mouseClicked() {
