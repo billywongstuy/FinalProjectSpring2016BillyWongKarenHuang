@@ -1,3 +1,5 @@
+//something
+
 void makeRectangle(int x1, int y1, int x2, int y2) {
   fill(color(255,0,0));
   rect(x1,y1,x2-x1,2);
