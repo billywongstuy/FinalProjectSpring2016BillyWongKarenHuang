@@ -56,11 +56,10 @@ void draw() {
   dragPlant();
   surroundChoice();
   displayZombies();
-  //if(frameCount % 50 == 0){
+  moveZombies();
+  plantsAttack();
+  //if(frameCount % 90 == 0){
   //  l1.spawn();
-  //}
-  //for (int i = 0; i < path.size(); i++) {
-  //  rect(path.get(i).coords[1]*10,path.get(i).coords[0]*10,10,10);  
   //}
 }
 

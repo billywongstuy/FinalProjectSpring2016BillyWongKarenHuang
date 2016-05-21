@@ -7,8 +7,12 @@ class Level{
  List<Zombie>zombies= new LinkedList<Zombie>(); 
  
  void spawn(){
-   for(int i = 0;i < zombies.size();i++){
-     area[zombies.get(i).getCoords()[0]][zombies.get(i).getCoords()[1]].setZombies(zombies.get(i));
+   //for(int i = 0;i < zombies.size();i++){
+     //area[0][58].setZombies(zombies.remove(i));
+     //area[zombies.get(i).getCoords()[0]][zombies.get(i).getCoords()[1]].setZombies(zombies.get(i));
+   //}
+   if (zombies.size() > 0) {
+     area[0][58].setZombies(zombies.remove(0));
    }
  }
  

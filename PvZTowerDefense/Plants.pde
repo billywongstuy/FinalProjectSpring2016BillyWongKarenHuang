@@ -47,9 +47,10 @@ abstract class Plant {
     Zombie z = null;
     for (int i = 0; i <= range*2; i++) {
       for (int j = 0; j <= range*2; j++) {
-        int row = (int)((Y-15)/10+range-i);
-        int col = (int)((X-15)/10+range-j);
-        if (area[row][col].getZombies().get(0) != null) {
+        int row = (int)((y-15)/10+range-i);
+        int col = (int)((x-15)/10+range-j);
+               
+        if (row >= 0 && row < 68 && col >= 0 && col < 68 && area[row][col] instanceof Road && area[row][col].getZombies().size() > 0 && area[row][col].getZombies().get(0) != null) {
           if (area[row][col].startDistance > distance) {
             z = area[row][col].getZombies().get(0);
             distance = area[row][col].startDistance;
@@ -64,7 +65,11 @@ abstract class Plant {
  void attack() {
    if (counter > 0) {
       counter -= .5;
-      findNearestZombie().takeDamage(power);
+      Zombie target = findNearestZombie();
+      if (target != null) {
+        System.out.println("found it");
+        target.takeDamage(power);  
+      }
     }
     else {
       counter = rate;  
