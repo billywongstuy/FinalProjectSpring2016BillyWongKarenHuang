@@ -18,7 +18,21 @@ class Level{
  
  void addZombie(int n, Zombie z){
    for(int i = 0;i < n;i++){
-     zombies.add(z);
+     if (z instanceof Normal) {
+       zombies.add(new Normal());  
+     }
+     else if (z instanceof Cone) {
+       zombies.add(new Cone());  
+     }
+     else if (z instanceof Bucket) {
+       zombies.add(new Bucket());  
+     }
+     else if (z instanceof Football) {
+       zombies.add(new Football());  
+     }
+     else if (z instanceof Gargantuar) {
+       zombies.add(new Gargantuar());  
+     }
    }
   }
 }

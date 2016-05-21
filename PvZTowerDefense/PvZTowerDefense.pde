@@ -43,7 +43,7 @@ void setup() {
   //area[19][50].startDistance = 29;
   //area[19][49].startDistance = 29;
   //ltest.spawn();
-  l1.spawn();
+  //l1.spawn();
 }
 
 
@@ -59,9 +59,9 @@ void draw() {
   displayZombies();
   moveZombies();
   plantsAttack();
-  //if(frameCount % 90 == 0){
-  //  l1.spawn();
-  //}
+  if(frameCount % 90 == 0){
+    l1.spawn();
+  }
 }
 
 void mouseClicked() {
