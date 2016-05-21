@@ -42,7 +42,8 @@ void setup() {
   setupLevels();
   //area[19][50].startDistance = 29;
   //area[19][49].startDistance = 29;
-  ltest.spawn();
+  //ltest.spawn();
+  l1.spawn();
 }
 
 
