@@ -1,5 +1,4 @@
 class Level{
-  
  public Level() {
    
  }
@@ -7,8 +6,8 @@ class Level{
  List<Zombie>zombies= new LinkedList<Zombie>(); 
  
  void spawn(){
-   for(int i = 0;i < zombies.size();i++){
-     area[zombies.get(i).getCoords()[0]][zombies.get(i).getCoords()[1]].setZombies(zombies.get(i));
+   for(int j = 0;j < zombies.size();j ++){
+     area[zombies.get(j).getCoords()[0]][zombies.get(j).getCoords()[1]].setZombies(zombies.get(j));
    }
  }
  

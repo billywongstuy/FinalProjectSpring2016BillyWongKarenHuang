@@ -355,13 +355,19 @@ void displayPlanted() {
 
 void displayZombies(){
   int disp = 0;
+  int time = 0;
   for(Zombie z: alive){
-   System.out.println(Arrays.toString(z.coords));
-   fill(color(1,1,1));
-   ellipse(z.coords[1]*10+5,z.coords[0]*10,30,30);
-   fill(color(255,255,255));
-   text(disp,z.coords[1]*10+5,z.coords[0]*10);
-   disp++;
-    z.move();
-  }
+   if(millis() > time){
+     time = millis() + 1000;
+     System.out.println(Arrays.toString(z.coords));
+     fill(color(1,1,1));
+     ellipse(z.coords[1]*10+5,z.coords[0]*10,30,30);
+     fill(color(255,255,255));
+     text(disp,z.coords[1]*10+5,z.coords[0]*10);
+     disp++;
+     if(frameCount % 50 == 0){
+      z.move();
+     }
+    }
+   }
 }
