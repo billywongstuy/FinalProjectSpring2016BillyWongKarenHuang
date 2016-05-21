@@ -246,8 +246,8 @@ class Road extends Square {
   
   public Road(int i,int x,int y) {
     startDistance = i;
-    coords[0] = x;
-    coords[1] = y;
+    coords[0] = y;
+    coords[1] = x;
   }
   
   int[] getCoords(){
