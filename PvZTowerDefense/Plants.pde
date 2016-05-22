@@ -73,7 +73,7 @@ abstract class Plant {
         if (target != null) {
           System.out.println("found it");
           target.takeDamage(power);  
-          rect(0,0,10,10);
+          //rect(0,0,10,10);
         }
       }
       else {
