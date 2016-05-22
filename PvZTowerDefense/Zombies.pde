@@ -1,6 +1,6 @@
 abstract class Zombie {
   int speed;
-  int health;
+  int health;  
   String type;
   String[]special;
   int gain; //sun yield
