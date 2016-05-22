@@ -23,6 +23,11 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 ##Development Log##
 
 
+### 5/22/16 ###
+
+-Fixed plant range issues
+
+
 ### 5/21/16 ###
 
 -Fixed plant choosing zombie function

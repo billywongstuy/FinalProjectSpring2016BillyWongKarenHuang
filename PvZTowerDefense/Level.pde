@@ -12,7 +12,9 @@ class Level{
      //area[zombies.get(i).getCoords()[0]][zombies.get(i).getCoords()[1]].setZombies(zombies.get(i));
    //}
    if (zombies.size() > 0) {
-     area[0][58].setZombies(zombies.remove(0));
+     Zombie z = zombies.remove(0);
+     area[0][58].setZombies(z);
+     alive.add(z);
    }
  }
  
