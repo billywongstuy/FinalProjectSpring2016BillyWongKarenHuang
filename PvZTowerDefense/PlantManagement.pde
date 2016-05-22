@@ -143,6 +143,3 @@ void showPlant() {
     ellipse(plantShowing.x,plantShowing.y,x,x);  
   }
 }
-
-
-//ellipse(c.col*10+15,c.row*10+15,30,30);
