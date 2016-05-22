@@ -45,10 +45,13 @@ abstract class Plant {
   Zombie findNearestZombie() {
     float distance = Integer.MIN_VALUE;
     Zombie z = null;
-    for (int i = 0; i <= range*2; i++) {
-      for (int j = 0; j <= range*2; j++) {
-        int row = (int)((y-15)/10+range-i);
-        int col = (int)((x-15)/10+range-j);
+    for (int i = 0; i <= range; i++) {
+      for (int j = 0; j <= range; j++) {
+        int row = (int)((y)/10+range/2-i);
+        int col = (int)((x)/10+range/2-j);
+         
+         //fill(color(255,0,0,100));
+         //rect(col*10,row*10,10,10);
                
         if (row >= 0 && row < 68 && col >= 0 && col < 68 && area[row][col] instanceof Road && area[row][col].getZombies().size() > 0 && area[row][col].getZombies().get(0) != null) {
           if (area[row][col].startDistance > distance) {
@@ -63,17 +66,20 @@ abstract class Plant {
  
  
  void attack() {
-   if (counter > 0) {
-      counter -= .5;
-      Zombie target = findNearestZombie();
-      if (target != null) {
-        System.out.println("found it");
-        target.takeDamage(power);  
+   if (frameCount % 15 == 0) {
+     if (counter > 0) {
+        counter -= .5;
+        Zombie target = findNearestZombie();
+        if (target != null) {
+          System.out.println("found it");
+          target.takeDamage(power);  
+          rect(0,0,10,10);
+        }
       }
-    }
-    else {
-      counter = rate;  
-    }  
+      else {
+        counter = rate;  
+      }  
+   }
  }
  
  void applyEffects() {};

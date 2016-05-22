@@ -289,7 +289,7 @@ class Road extends Square {
   
   void setZombies(Zombie z){
     zombiesHere.add(z);
-    alive.add(z);
+    //alive.add(z);
   }
   
 }
@@ -353,19 +353,25 @@ void displayPlanted() {
   }
 }
 
+
+
+//FIRST PLANT NEAR ZOMBIE KILLS IT
+//TOO MUCH RANGE
+
 void displayZombies(){
-  int disp = 0;
+  int disp = 1;
   for(int i = 0; i < alive.size(); i++){
     Zombie z = alive.get(i);
-    if (z.health < 0) {
+    if (z.health <= 0) {
       alive.remove(z);  
       i--;
+      System.out.println("die");
     }
     else {       
        fill(color(1,1,1));
        ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
        fill(color(255,255,255));
-       text(disp,z.coords[1]*10+5,z.coords[0]*10+5);
+       text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
        disp++;
     }
     
@@ -376,7 +382,7 @@ void displayZombies(){
 void moveZombies() {
   for (Zombie z: alive) {
     if (frameCount % 50 == 0) {
-      System.out.println("Zombie: " + Arrays.toString(z.coords));
+      System.out.println("Zombie: " + Arrays.toString(z.coords) + " " + z.health);
       z.move();
     }  
   }
