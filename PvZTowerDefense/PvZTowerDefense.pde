@@ -12,7 +12,8 @@ boolean surroundActive;
 int sun = 300;
 int health = 200;
 Level l1,l2,l3,ltest;
-
+Level[] levels = {l1,l2,l3,ltest};
+int ctr = 0;
 
 void setup() {
   size(800,800);
@@ -59,8 +60,11 @@ void draw() {
   displayZombies();
   moveZombies();
   plantsAttack();
+  if(alive.isEmpty()){
+      ctr++;
+  }
   if(frameCount % 90 == 0){
-    l1.spawn();
+    levels[ctr].spawn();
   }
 }
 

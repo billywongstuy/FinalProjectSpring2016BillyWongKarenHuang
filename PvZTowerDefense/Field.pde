@@ -359,7 +359,7 @@ void displayPlanted() {
 //TOO MUCH RANGE
 
 void displayZombies(){
-  int disp = 1;
+  //int disp = 1;
   for(int i = 0; i < alive.size(); i++){
     Zombie z = alive.get(i);
     if (z.health <= 0) {
@@ -372,7 +372,7 @@ void displayZombies(){
        ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
        fill(color(255,255,255));
        text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
-       disp++;
+       //disp++;
     }
     
   }
