@@ -387,8 +387,8 @@ void displayZombies(){
        ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
        fill(color(255,255,255));
        text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
+    }
   }
-}
 
 
 void moveZombies() {

@@ -13,7 +13,8 @@ int sun = 300;
 int health = 200;
 List<Zombie> layout = new LinkedList<Zombie>();
 Level l1,l2,l3,ltest;
-
+Level[] levels = new Level[4];  //set up in setupLevels()
+int ctr = 0;
 
 void setup() {
   size(800,800);
@@ -41,6 +42,7 @@ void setup() {
   }
   //rect(480,120,10,10);*/
   setupLevels();
+  //levels = {l1,l2,l3,ltest};
   //area[19][50].startDistance = 29;
   //area[19][49].startDistance = 29;
   //ltest.spawn();
@@ -62,7 +64,12 @@ void draw() {
   moveZombies();
   plantsAttack();
   if(frameCount % 90 == 0){
-    l1.spawn();
+    System.out.println(ctr);
+    System.out.println(Arrays.toString(levels));
+    levels[ctr].spawn();
+  }
+    if(alive.isEmpty() && frameCount % 90 == 0){
+      ctr++;
   }
 }
 
