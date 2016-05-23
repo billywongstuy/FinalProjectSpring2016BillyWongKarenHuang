@@ -16,6 +16,7 @@ abstract class Zombie {
     coords[1] = 58;
   }
   void takeDamage(int h) {
+  //System.out.println("ow " + h + " damage now " + health + " hp");
     health -= h;  
   }
   
@@ -28,12 +29,20 @@ abstract class Zombie {
   }
   
   void move(){
-    if (area[coords[0]][coords[1]].startDistance < path.size()) {
+    if (coords[0] == 67 && coords[1] == 67) {
+      
+    }
+    else if (area[coords[0]][coords[1]].startDistance < path.size()) {
       int [] temp = area[coords[0]][coords[1]].next().getCoords();
-      area[coords[0]][coords[1]].setZombies(null);
+      area[coords[0]][coords[1]].removeZombie(this);
       coords = temp;
       area[temp[0]][temp[1]].setZombies(this);
     }
+  }
+  
+  void die() {
+    area[coords[0]][coords[1]].removeZombie(this);
+    alive.remove(alive.indexOf(this));
   }
   
 }

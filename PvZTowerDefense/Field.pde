@@ -1,4 +1,6 @@
 ArrayList<Square>path = new ArrayList<Square>();
+ArrayList<Crop>planted = new ArrayList<Crop>();
+ArrayList<Zombie>alive = new ArrayList<Zombie>();
 
 void fillField() {
   int start = 1;
@@ -238,6 +240,7 @@ abstract class Square{
   boolean placePlant(Plant p) {return false;};
   void setPlant(Plant p) {};
   void setZombies(Zombie z) {};
+  void removeZombie (Zombie z) {};
   Square next() {return null;};
   int[] getCoords(){return null;};
 }
@@ -292,6 +295,10 @@ class Road extends Square {
     //alive.add(z);
   }
   
+  void removeZombie(Zombie z) {
+    zombiesHere.remove(zombiesHere.indexOf(z));  
+  }
+  
 }
 
 
@@ -316,7 +323,7 @@ class Soil extends Square {
       }
     }
     planted.add(new Crop(p,row,col));
-    System.out.println("Planted at " + row + "," + col);
+    //System.out.println("Planted at " + row + "," + col);
     return true;
   }
   
@@ -325,8 +332,7 @@ class Soil extends Square {
   }
 }
 
-ArrayList<Crop>planted = new ArrayList<Crop>();
-ArrayList<Zombie>alive = new ArrayList<Zombie>();
+
 
 class Crop {
   int row;
@@ -358,23 +364,29 @@ void displayPlanted() {
 //FIRST PLANT NEAR ZOMBIE KILLS IT
 //TOO MUCH RANGE
 
-void displayZombies(){
-  int disp = 1;
+void checkZombieCond() {
+  ArrayList<Zombie>toDie = new ArrayList<Zombie>();
   for(int i = 0; i < alive.size(); i++){
     Zombie z = alive.get(i);
-    if (z.health <= 0) {
-      alive.remove(z);  
-      i--;
-      System.out.println("die");
+    if (z.coords[0] == 67) {
     }
-    else {       
+    if (z.health <= 0) {
+      toDie.add(z);
+    }
+  }
+  for (int j = 0; j < toDie.size(); j++) {
+    toDie.get(j).die();    
+  }
+}
+
+
+void displayZombies(){
+  //zombies are going away but not dying
+  for(Zombie z: alive){    
        fill(color(1,1,1));
        ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
        fill(color(255,255,255));
        text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
-       disp++;
-    }
-    
   }
 }
 
@@ -382,7 +394,6 @@ void displayZombies(){
 void moveZombies() {
   for (Zombie z: alive) {
     if (frameCount % 50 == 0) {
-      System.out.println("Zombie: " + Arrays.toString(z.coords) + " " + z.health);
       z.move();
     }  
   }

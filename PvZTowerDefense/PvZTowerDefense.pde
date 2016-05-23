@@ -11,6 +11,7 @@ Plant plantShowing = null;
 boolean surroundActive;
 int sun = 300;
 int health = 200;
+List<Zombie> layout = new LinkedList<Zombie>();
 Level l1,l2,l3,ltest;
 
 
@@ -56,6 +57,7 @@ void draw() {
   deselect();  
   dragPlant();
   surroundChoice();
+  checkZombieCond();
   displayZombies();
   moveZombies();
   plantsAttack();
