@@ -359,11 +359,13 @@ void displayPlanted() {
 //TOO MUCH RANGE
 
 void displayZombies(){
+  //zombies are going away but not dying
   int disp = 1;
+  System.out.println("size: " + alive.size());
   for(int i = 0; i < alive.size(); i++){
     Zombie z = alive.get(i);
     if (z.health <= 0) {
-      alive.remove(z);  
+      z.die();
       i--;
       System.out.println("die");
     }

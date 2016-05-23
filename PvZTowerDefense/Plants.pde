@@ -43,6 +43,7 @@ abstract class Plant {
  
  
   Zombie findNearestZombie() {
+    //find zombies in alive not any zombie
     float distance = Integer.MIN_VALUE;
     Zombie z = null;
     for (int i = 0; i <= range; i++) {
