@@ -20,8 +20,11 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 ##Project Plan##
 
 -Make one track
+
 -Make a few enemy classes
+
 -Make a few tower classes
+
 -Implement resources and health
 
 
@@ -32,16 +35,15 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 -Fixed plant range issues
 
-
 ### 5/21/16 ###
 
 -Fixed plant choosing zombie function
 
+-Fixed zombie display issue
 
 ### 5/20/16 ###
 
 -Worked on zombie movement
-
 
 ### 5/19/16 ###
 
@@ -65,15 +67,21 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 -Worked on clicking on plants to view the range (and upgrades)
 
+-Started levels class
+
 ### 5/15/16 ###
 
 -Worked on plant placement on the map
+
+-Put in zombie subclasses
 
 ### 5/14/16 ###
 
 -Started implementing plant classes
 
 -Started implementing plant selection and placing
+
+-Started implementing zombie class
 
 
 ### Pre 5/14/16 ###
