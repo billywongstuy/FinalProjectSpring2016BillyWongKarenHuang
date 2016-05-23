@@ -57,6 +57,7 @@ void draw() {
   deselect();  
   dragPlant();
   surroundChoice();
+  checkZombieCond();
   displayZombies();
   moveZombies();
   plantsAttack();

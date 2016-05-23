@@ -55,22 +55,26 @@ abstract class Plant {
          //rect(col*10,row*10,10,10);
                
         if (row >= 0 && row < 68 && col >= 0 && col < 68 && area[row][col] instanceof Road && area[row][col].getZombies().size() > 0 && area[row][col].getZombies().get(0) != null) {
-          if (area[row][col].startDistance > distance) {
-            z = area[row][col].getZombies().get(0);
-            distance = area[row][col].startDistance;
+          if (area[row][col].startDistance > distance ) {
+            //if (alive.indexOf(area[row][col].getZombies().get(0)) != -1) {
+              z = area[row][col].getZombies().get(0);
+              distance = area[row][col].startDistance;
+            //}
           }
         }        
       }
     }
+    //System.out.println("This zombie: " + z);
     return z;
   }
  
  
  void attack() {
-   if (frameCount % 15 == 0) {
+   if (frameCount % 35 == 0) {
      if (counter > 0) {
         counter -= .5;
-        Zombie target = findNearestZombie();
+        Zombie target = null;
+        target = findNearestZombie();
         if (target != null) {
           System.out.println("found it");
           target.takeDamage(power);  
