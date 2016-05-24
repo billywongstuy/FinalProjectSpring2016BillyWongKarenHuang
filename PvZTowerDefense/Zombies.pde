@@ -43,6 +43,7 @@ abstract class Zombie {
   void die() {
     area[coords[0]][coords[1]].removeZombie(this);
     alive.remove(alive.indexOf(this));
+    sun += gain;
   }
   
 }

@@ -52,6 +52,7 @@ void draw() {
   image(map,0,0);
   fill(color(0,0,0));
   text(sun,686,68);
+  text(health,746,68);
   showPlant();
   displayPlanted();
   deselect();  
@@ -80,8 +81,9 @@ void mouseClicked() {
   else if (mouseX >= 670 && mouseY >= 396 && mouseY <= 690) {
     fadeOut();
   }
-  else if (plantChosen != null && validLocation()) {
+  else if (plantChosen != null && validLocation() && enoughMoney()) {
     area[mouseY/10][mouseX/10].placePlant(plantChosen); 
+    sun -= plantChosen.cost;
     if (!(plantChosen instanceof Spikeweed)) {
       plantChosen = null;
     }
