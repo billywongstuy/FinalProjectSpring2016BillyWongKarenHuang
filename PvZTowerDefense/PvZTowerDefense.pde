@@ -9,7 +9,7 @@ PFont text;
 Plant plantChosen = null;
 Plant plantShowing = null;
 boolean surroundActive;
-int sun = 300;
+int sun = 9999;  //300
 int health = 200;
 List<Zombie> layout = new LinkedList<Zombie>();
 Level l1,l2,l3,ltest;
@@ -68,12 +68,6 @@ void draw() {
 }
 
 void mouseClicked() {
-  if (mouseX < 680) {
-  System.out.println(mouseY/10 + " " + mouseX/10);
-  System.out.println(area[mouseY/10][mouseX/10].getPlant() != null);
-  System.out.println(plantChosen);
-  System.out.println(plantShowing);
-  }
   if (mouseX >= 685 && mouseX <= 788 && mouseY >= 81 && mouseY <= 390) {
     plantShowing = null;
     selectPlant();  

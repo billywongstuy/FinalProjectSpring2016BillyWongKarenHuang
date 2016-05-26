@@ -383,19 +383,35 @@ void checkZombieCond() {
 void displayZombies(){
   //zombies are going away but not dying
   for(Zombie z: alive){    
-       fill(color(1,1,1));
-       ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
-       fill(color(255,255,255));
-       text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
+    fill(color(1,1,1));
+    if (z.slow != 1) {
+      fill(color(0,0,250));  
+    }
+    ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
+    fill(color(255,255,255));
+    text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
   }
 }
 
 
 void moveZombies() {
+  ArrayList<Zombie>toRemove = new ArrayList<Zombie>();
   for (Zombie z: alive) {
-    if (frameCount % 50 == 0) {
-      z.move();
+    if (z.slowTimer > 0) {
+      z.slowTimer--;  
+    }
+    if (z.slowTimer == 0) {
+      z.slow = 1;  
+    }
+    if (frameCount % (50*z.slow) == 0) {
+      if (!z.move()) {
+        health -= z.health;
+        toRemove.add(z);
+      }
     }  
+  }
+  for (Zombie z: toRemove) {
+    alive.remove(alive.indexOf(z));  
   }
 }
 

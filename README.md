@@ -28,6 +28,11 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 ##Development Log##
 
 
+### 5/25/16 ###
+
+-Started implementing plant attacks (types)
+
+
 ### 5/23/16 ###
 
 -Fixed plant targetting issues (for now)

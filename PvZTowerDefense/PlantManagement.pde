@@ -46,7 +46,6 @@ void deselect() {
 }
 
 void fadeOut() {
-  System.out.println("No plant");  
   plantChosen = null;
   surroundActive = false;
   image(bar,670,0);  

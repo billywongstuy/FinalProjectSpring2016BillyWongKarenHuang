@@ -5,6 +5,8 @@ abstract class Zombie {
   String[]special;
   int gain; //sun yield
   int[] coords = new int[2];
+  float slow = 1;
+  int slowTimer = 0;
   
   public Zombie(int s, int h, String t, String[] sp, int g){
     speed = s;
@@ -28,16 +30,15 @@ abstract class Zombie {
     return coords;
   }
   
-  void move(){
-    if (coords[0] == 67 && coords[1] == 67) {
-      
-    }
-    else if (area[coords[0]][coords[1]].startDistance < path.size()) {
+  boolean move(){
+    if (area[coords[0]][coords[1]].startDistance < path.size()) {
       int [] temp = area[coords[0]][coords[1]].next().getCoords();
       area[coords[0]][coords[1]].removeZombie(this);
       coords = temp;
       area[temp[0]][temp[1]].setZombies(this);
+      return true;
     }
+    return false;
   }
   
   void die() {
