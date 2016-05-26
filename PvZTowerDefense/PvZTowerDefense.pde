@@ -15,6 +15,8 @@ List<Zombie> layout = new LinkedList<Zombie>();
 Level l1,l2,l3,ltest;
 Level[] levels = new Level[4];  //set up in setupLevels()
 int ctr = 0;
+boolean levelStarted = false;
+boolean fastForward = false;
 
 void setup() {
   size(800,800);
@@ -63,13 +65,15 @@ void draw() {
   displayZombies();
   moveZombies();
   plantsAttack();
-  if(frameCount % 90 == 0){
-    System.out.println(ctr);
-    System.out.println(Arrays.toString(levels));
+  if(levelStarted && frameCount % 90 == 0){
+    //System.out.println(ctr);
+    //System.out.println(Arrays.toString(levels));
     levels[ctr].spawn();
   }
-    if(alive.isEmpty() && frameCount % 90 == 0){
+    if(levelStarted && alive.isEmpty() && frameCount % 90 == 0){
+      sun += levels[ctr].yield;
       ctr++;
+      levelStarted = false;
   }
 }
 
