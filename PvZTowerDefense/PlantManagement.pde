@@ -140,3 +140,14 @@ void showPlant() {
 boolean enoughMoney() {
   return plantChosen.cost <= sun;  
 }
+
+
+Plant removePlant(Plant p) {
+  for (int i = 0; i < planted.size(); i++) {
+    if (planted.get(i).p == p) {
+      planted.remove(i);  
+      i--;
+    }
+  }
+  return p;
+}

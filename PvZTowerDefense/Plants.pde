@@ -12,7 +12,7 @@ abstract class Plant {
  int x;
  int y;
  double counter;
-
+ 
  public Plant(int c, double r, int p, double ra, String n) {
    cost = c;
    rate = r;
@@ -247,20 +247,33 @@ class Sunflower extends Plant{
   } 
   
   void attack() {
-    //make sun
+    if (frameCount % 180 == 0) {
+      sun += 25;
+    }
   }
   
 }
 
 
 class Spikeweed extends Plant{  
+  int stack;
+  
   public Spikeweed() {
-    super(150,0,1,5,"Spikeweed"); 
+    super(10,0,1,5,"Spikeweed"); 
     letter = 'W';
+    stack = 8;
   } 
   
   void attack() {
     //if zombies here, do damage
+    Zombie target = findNearestZombie();
+    if (stack <= 0) {
+      removePlant(this);
+    }
+    else if (target != null) {
+      target.health -= 1;
+      stack -= 1;
+    }
   }
   
 }

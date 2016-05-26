@@ -75,11 +75,14 @@ void mouseClicked() {
   else if (mouseX >= 670 && mouseY >= 396 && mouseY <= 690) {
     fadeOut();
   }
-  else if (plantChosen != null && validLocation() && enoughMoney()) {
+  else if (plantChosen != null && validLocation() && enoughMoney() && mouseX < 680) {
     area[mouseY/10][mouseX/10].placePlant(plantChosen); 
     sun -= plantChosen.cost;
     if (!(plantChosen instanceof Spikeweed)) {
       plantChosen = null;
+    }
+    else {
+      plantChosen = new Spikeweed();  
     }
   }
   else if (plantChosen == null && plantShowing == null) {
