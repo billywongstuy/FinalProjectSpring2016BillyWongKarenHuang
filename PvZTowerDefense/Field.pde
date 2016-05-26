@@ -361,9 +361,6 @@ void displayPlanted() {
 
 
 
-//FIRST PLANT NEAR ZOMBIE KILLS IT
-//TOO MUCH RANGE
-
 void checkZombieCond() {
   ArrayList<Zombie>toDie = new ArrayList<Zombie>();
   for(int i = 0; i < alive.size(); i++){
@@ -381,12 +378,12 @@ void checkZombieCond() {
 
 
 void displayZombies(){
-  //zombies are going away but not dying
   for(Zombie z: alive){    
        fill(color(1,1,1));
        ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
        fill(color(255,255,255));
        text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
+       //pics and resize!!!
     }
   }
 
