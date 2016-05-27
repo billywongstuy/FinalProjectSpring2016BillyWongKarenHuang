@@ -12,7 +12,7 @@ abstract class Plant {
  int x;
  int y;
  double counter;
-
+ 
  public Plant(int c, double r, int p, double ra, String n) {
    cost = c;
    rate = r;
@@ -64,19 +64,44 @@ abstract class Plant {
         }        
       }
     }
-    //System.out.println("This zombie: " + z);
     return z;
+  }
+  
+  Zombie findNearestZombie(int x, int y) {
+    float distance = Integer.MIN_VALUE;
+    Zombie z = null;
+    for (int i = 0; i <= range/2; i++) {
+      for (int j = 0; j <= range/2; j++) {
+        int row = (int)(this.y/10+i*y);
+        int col = (int)(this.x/10+i*x);
+        
+        //rect(col*10,row*10,10,10);
+              
+        
+        for (int k = -1; k <= 1; k++) {
+          for (int l = -1; l <= 1; l++) {
+            //rect((col+l)*10,(row+k)*10,10,10);
+            if (row+k >= 0 && row+k < 68 && col+l >= 0 && col+l < 68 && area[row+k][col+l] instanceof Road && area[row+k][col+l].getZombies().size() > 0 && area[row+k][col+l].getZombies().get(0) != null) {
+              if (area[row+k][col+l].startDistance > distance ) {
+                z = area[row+k][col+l].getZombies().get(0);
+                distance = area[row+k][col+l].startDistance;
+              }
+            }      
+          }
+        }
+      }
+    }
+    return z;  
   }
  
  
  void attack() {
-   if (frameCount % 35 == 0) {
+   if (frameCount % (int)(35*rate) == 0) {
      if (counter > 0) {
         counter -= .5;
         Zombie target = null;
         target = findNearestZombie();
         if (target != null) {
-          System.out.println("found it");
           target.takeDamage(power);  
           //rect(0,0,10,10);
         }
@@ -86,6 +111,8 @@ abstract class Plant {
       }  
    }
  }
+ 
+ 
  
  void applyEffects() {};
  
@@ -118,9 +145,24 @@ class Gloomshroom extends Plant{
     letter = 'G';
   } 
   
-  //void attack() {
-    
-  //}
+  void attack() { //<>//
+    if (frameCount % (35*rate) == 0) {
+     if (counter > 0) {
+        counter -= .5;
+        for (int i = -1; i <= 1; i++) {
+          for (int j = -1; j <= 1; j++) {
+            Zombie target = findNearestZombie(i,j);
+            if (target != null) {
+              target.takeDamage(power);  
+            }
+          }
+        }
+      }
+      else {
+        counter = rate;  
+      }  
+   }
+  }
   
   void applyEffects() {}
 }
@@ -159,9 +201,24 @@ class SnowPea extends Plant{
     letter = 'S';
   } 
   
-  //void attack() {
-    
-  //}
+  void attack() {
+    if (frameCount % (int)(35*rate) == 0) {
+     if (counter > 0) {
+        counter -= .5;
+        Zombie target = null;
+        target = findNearestZombie();
+        if (target != null) {
+          target.takeDamage(power);  
+          target.slow = 0.9;
+          target.slowTimer = 300;
+          //rect(0,0,10,10);
+        }
+      }
+      else {
+        counter = rate;  
+      }  
+   }    
+  }
   
   void applyEffects() {}
 }
@@ -169,7 +226,7 @@ class SnowPea extends Plant{
 
 class Repeater extends Plant{  
   public Repeater() {
-    super(400,1,1,20,"Repeater");  
+    super(400,0.8,2,20,"Repeater");  
     letter = 'R';
   } 
   
@@ -189,27 +246,34 @@ class Sunflower extends Plant{
     letter = 'F';
   } 
   
-  //void attack() {
-    
-  //}
-  
-  void applyEffects() {
-    //make sun
+  void attack() {
+    if (frameCount % 180 == 0) {
+      sun += 25;
+    }
   }
+  
 }
 
 
 class Spikeweed extends Plant{  
+  int stack;
+  
   public Spikeweed() {
-    super(150,0,1,5,"Spikeweed"); 
+    super(10,0,1,5,"Spikeweed"); 
     letter = 'W';
+    stack = 8;
   } 
   
-  //void attack() {
-    
-  //}
-  
-  void applyEffects() {
-    //on road
+  void attack() {
+    //if zombies here, do damage
+    Zombie target = findNearestZombie();
+    if (stack <= 0) {
+      removePlant(this);
+    }
+    else if (target != null) {
+      target.health -= 1;
+      stack -= 1;
+    }
   }
+  
 }

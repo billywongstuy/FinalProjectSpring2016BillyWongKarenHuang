@@ -327,6 +327,8 @@ class Soil extends Square {
     return true;
   }
   
+  
+  
   Plant getPlant() {
     return plantHere;    
   }
@@ -349,6 +351,11 @@ class Crop {
 void displayPlanted() {
   for (Crop c: planted) {
     fill(color(0,0,0));
+    if (c.p.getClass() == new Sunflower().getClass()) {
+      if (frameCount % 180 == 0) {
+        fill(color(255,255,0));  
+      }
+    }
     //rect(c.col*10,c.row*10,30,30);
     ellipse(c.col*10+15,c.row*10+15,30,30); 
     fill(color(255,255,255));
@@ -379,25 +386,41 @@ void checkZombieCond() {
 
 void displayZombies(){
   for(Zombie z: alive){    
-       fill(color(1,1,1));
-       ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
-       fill(color(255,255,255));
-       text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
-       //pics and resize!!!
+    fill(color(1,1,1));
+    if (z.slow != 1) {
+      fill(color(0,0,250));  
     }
+    ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
+    fill(color(255,255,255));
+    text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
   }
+}
 
 
 void moveZombies() {
+  ArrayList<Zombie>toRemove = new ArrayList<Zombie>();
   for (Zombie z: alive) {
-    if (frameCount % 50 == 0) {
-      z.move();
+    if (z.slowTimer > 0) {
+      z.slowTimer--;  
+    }
+    if (z.slowTimer == 0) {
+      z.slow = 1;  
+    }
+    if (frameCount % (50*z.slow) == 0) {
+      if (!z.move()) {
+        health -= z.health;
+        toRemove.add(z);
+      }
     }  
+  }
+  for (Zombie z: toRemove) {
+    alive.remove(alive.indexOf(z));  
   }
 }
 
 void plantsAttack() {
-  for (Crop c: planted) {
+  for (int i = 0; i < planted.size(); i++) {
+    Crop c = planted.get(i);
     c.p.attack();  
   }
 }

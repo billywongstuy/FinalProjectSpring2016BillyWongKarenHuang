@@ -46,13 +46,13 @@ void deselect() {
 }
 
 void fadeOut() {
-  System.out.println("No plant");  
   plantChosen = null;
   surroundActive = false;
   image(bar,670,0);  
 }
 
 void selectPlant() {
+  //add a flicker if not enough sun
   surroundActive = false;
   if (mouseX >= 685 && mouseX <= 733 && mouseY >= 81 && mouseY <= 147) {
     plantChosen = new Peashooter();    
@@ -77,6 +77,9 @@ void selectPlant() {
   }
   else if (mouseX >= 740 && mouseX <= 788 && mouseY >= 324 && mouseY <= 390) {
     plantChosen = new Spikeweed();
+  }
+  if (plantChosen.cost > sun) {
+    plantChosen = null;  
   }
 }
 
@@ -132,4 +135,19 @@ void showPlant() {
     //need to fix the circle here for the coordinates
     ellipse(plantShowing.x,plantShowing.y,x,x);  
   }
+}
+
+boolean enoughMoney() {
+  return plantChosen.cost <= sun;  
+}
+
+
+Plant removePlant(Plant p) {
+  for (int i = 0; i < planted.size(); i++) {
+    if (planted.get(i).p == p) {
+      planted.remove(i);  
+      i--;
+    }
+  }
+  return p;
 }
