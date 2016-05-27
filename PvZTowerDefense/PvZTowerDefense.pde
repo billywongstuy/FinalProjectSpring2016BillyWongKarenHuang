@@ -15,7 +15,7 @@ List<Zombie> layout = new LinkedList<Zombie>();
 Level l1,l2,l3,ltest;
 Level[] levels = new Level[4];  //set up in setupLevels()
 int ctr = 0;
-boolean levelStarted = false;
+boolean levelStarted = true;
 boolean fastForward = false;
 
 void setup() {

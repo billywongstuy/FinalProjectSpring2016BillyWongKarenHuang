@@ -390,9 +390,11 @@ void displayZombies(){
     if (z.slow != 1) {
       fill(color(0,0,250));  
     }
-    ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
-    fill(color(255,255,255));
-    text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
+    //ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
+    //fill(color(255,255,255));
+    //text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
+    PImage photo= loadImage("../Zombies/" + z.type + ".png");
+    image(photo,z.coords[1]*10 - 50,z.coords[0]*10 - 70);
   }
 }
 
