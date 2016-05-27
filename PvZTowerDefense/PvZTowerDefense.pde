@@ -15,7 +15,7 @@ List<Zombie> layout = new LinkedList<Zombie>();
 Level l1,l2,l3,ltest;
 Level[] levels = new Level[4];  //set up in setupLevels()
 int ctr = 0;
-boolean levelStarted = true;
+boolean levelStarted = false;
 boolean fastForward = false;
 
 void setup() {
@@ -57,6 +57,16 @@ void draw() {
   fill(color(0,0,0));
   text(sun,686,68);
   text(health,746,68);
+  stroke(0);
+  strokeCap(PROJECT);
+  strokeWeight(4);
+  noFill();
+  rect(675,510,120,50);
+  if(!levelStarted){
+    text("Start Level",691,540);
+  }else{
+    text("Fast Forward",681,540);
+  }
   showPlant();
   displayPlanted();
   deselect();  
@@ -69,19 +79,33 @@ void draw() {
   if(levelStarted && frameCount % 90 == 0){
     //System.out.println(ctr);
     //System.out.println(Arrays.toString(levels));
-    levels[ctr].spawn();
+    if(ctr < levels.length){
+      levels[ctr].spawn();
+    }
   }
     if(levelStarted && alive.isEmpty() && frameCount % 90 == 0){
       sun += levels[ctr].yield;
       ctr++;
       levelStarted = false;
+      fastForward = false;
   }
+  System.out.println(fastForward);
 }
 
 void mouseClicked() {
   if (mouseX >= 685 && mouseX <= 788 && mouseY >= 81 && mouseY <= 390) {
     plantShowing = null;
     selectPlant();  
+  }
+  //675,510,120,50
+  else if (mouseX >= 675 && mouseY >= 510 && mouseY <= 560){
+    if(!levelStarted){
+      levelStarted = true;
+    }else if(!fastForward){
+      fastForward = true;
+    }else{
+      fastForward = false;
+    }
   }
   else if (mouseX >= 670 && mouseY >= 396 && mouseY <= 690) {
     fadeOut();
