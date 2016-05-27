@@ -79,15 +79,24 @@ void draw() {
   if(levelStarted && frameCount % 90 == 0){
     //System.out.println(ctr);
     //System.out.println(Arrays.toString(levels));
-    if(ctr < levels.length){
       levels[ctr].spawn();
-    }
   }
-    if(levelStarted && alive.isEmpty() && frameCount % 90 == 0){
-      sun += levels[ctr].yield;
-      ctr++;
-      levelStarted = false;
-      fastForward = false;
+  if(levelStarted && alive.isEmpty()){
+    if(!fastForward){
+      if(frameCount % 90 == 0){
+        sun += levels[ctr].yield;
+        ctr++;
+        levelStarted = false;
+        fastForward = false;
+      }
+    }else{
+      if(frameCount % 45 == 0){
+        sun += levels[ctr].yield;
+        ctr++;
+        levelStarted = false;
+        fastForward = false;
+      }
+    }
   }
   System.out.println(fastForward);
 }
@@ -99,7 +108,7 @@ void mouseClicked() {
   }
   //675,510,120,50
   else if (mouseX >= 675 && mouseY >= 510 && mouseY <= 560){
-    if(!levelStarted){
+    if(!levelStarted && ctr < levels.length){
       levelStarted = true;
     }else if(!fastForward){
       fastForward = true;
