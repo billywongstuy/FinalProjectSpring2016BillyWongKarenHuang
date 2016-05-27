@@ -98,7 +98,7 @@ void draw() {
       }
     }
   }
-  System.out.println(fastForward);
+  //System.out.println(fastForward);
 }
 
 void mouseClicked() {
