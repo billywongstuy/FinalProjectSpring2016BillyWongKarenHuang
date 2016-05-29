@@ -410,6 +410,7 @@ void moveZombies() {
     if (z.slowTimer == 0) {
       z.slow = 1;  
     }
+    //System.out.print(Arrays.toString(z.coords) + " ");
     if (frameCount % (50*z.slow) == 0) {
       if (!z.move()) {
         health -= z.health;
@@ -417,6 +418,7 @@ void moveZombies() {
       }
     }  
   }
+  //System.out.println();
   for (Zombie z: toRemove) {
     alive.remove(alive.indexOf(z));  
   }

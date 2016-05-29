@@ -141,7 +141,7 @@ class Peashooter extends Plant{
 
 class Gloomshroom extends Plant{  
   public Gloomshroom() {
-    super(150,1.25,1,12,"Gloom-shroom"); 
+    super(150,1.25,1,13,"Gloom-shroom"); 
     letter = 'G';
   } 
   
@@ -168,22 +168,60 @@ class Gloomshroom extends Plant{
 }
 
 class Melonpult extends Plant{  
+  int blast;
+  
   public Melonpult() {
-    super(250,2,2,10,"Melon-pult"); 
+    super(250,2,1,12,"Melon-pult"); 
     letter = 'M';
+    blast = 4;
   } 
   
-  //void attack() {
-    
-  //}
+  void attack() {
+    if (frameCount % (int)(35*rate) == 0) {
+     if (counter > 0) {
+        counter -= .5;
+        Zombie target = null;
+        target = findNearestZombie();
+        if (target != null) {
+          //target.takeDamage(power);  
+          //coords[0] = y component or row
+          ArrayList<Zombie>toHit = new ArrayList<Zombie>();
+          int x = target.coords[0];
+          int y = target.coords[1];
+          for (int i = x-blast; i <= x+blast && i >= 0 && i < 68; i++) {
+            for (int j = y-blast; j <= y+blast && j >= 0 && j < 68; j++) {
+              if (area[i][j] instanceof Road) {
+                for (Zombie z: area[i][j].getZombies()) {
+                  toHit.add(z);
+                }
+              }
+            }
+          }
+          for (Zombie z: toHit) {
+            z.takeDamage(power);  
+          }
+        }
+      }
+      else {
+        counter = rate;  
+      }  
+   }
+  }
   
   void applyEffects() {}
 }
 
 
 class Bloomerang extends Plant{  
+  Boomerang b;
+  
+  
+  class Boomerang {
+    int [] location = new int[2];  
+  }
+  
   public Bloomerang() {
-    super(200,1.5,1,12,"Bloomerang");  
+    super(200,1.5,1,13,"Bloomerang");  
     letter = 'B';
   } 
   
@@ -197,7 +235,7 @@ class Bloomerang extends Plant{
 
 class SnowPea extends Plant{  
   public SnowPea() {
-    super(125,2,1,12,"Snow_Pea");  
+    super(125,2,1,14,"Snow_Pea");  
     letter = 'S';
   } 
   
