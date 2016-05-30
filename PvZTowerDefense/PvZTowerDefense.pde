@@ -26,9 +26,13 @@ void setup() {
   text = loadFont("SeriesOrbit-16.vlw");
   textFont(text);
   setupLevels();
-  for (Square r: path) {
-    System.out.print(Arrays.toString(r.coords) + " ");  
-  }
+  //for (Square r: path) {
+  //  System.out.print(Arrays.toString(r.coords) + " ");  
+  //}
+  //ltest.spawn();
+  //for (int i = 0; i < 10; i++) {
+  //moveZombies();
+  //}
 }
 
 

@@ -27,10 +27,26 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 ##Development Log##
 
+### 5/30/16 ###
+
+-Bloomerang (not finished)
+
+-Some bug fixes
+
+
+### 5/27/16 ###
+
+-Melon-pults and Snow-peas
+
+
+### 5/26/16 ###
+
+-Sunflowers and Spikeweeds
+
 
 ### 5/25/16 ###
 
--Started implementing plant attacks (types)
+-Started implementing plant attacks (types) e.g. Gloom-shroom and Repeater
 
 
 ### 5/23/16 ###

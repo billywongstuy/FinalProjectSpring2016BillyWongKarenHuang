@@ -323,7 +323,7 @@ class Soil extends Square {
       }
     }
     planted.add(new Crop(p,row,col));
-    //System.out.println("Planted at " + row + "," + col);
+    System.out.println("Planted at " + row + "," + col);
     return true;
   }
   
