@@ -97,7 +97,7 @@ abstract class Plant {
  
  void attack() {
    if(fastForward){
-     if(frameCount % (int)(35*rate) / 2 == 0) {
+     if(frameCount % (int)((35*rate)/2) == 0){
        if (counter > 0) {
         counter -= .5;
         Zombie target = null;
@@ -120,9 +120,10 @@ abstract class Plant {
             target.takeDamage(power);  
             //rect(0,0,10,10);
           }
-        }else {
+        }
+        else {
           counter = rate;  
-        }  
+        }
      }
    }
  }
@@ -161,8 +162,8 @@ class Gloomshroom extends Plant{
   } 
   
   void attack() { //<>//
-    if(fastForward){
-      if(frameCount % (int)(35*rate) / 2 == 0){
+    if(fastForward){ //<>//
+      if(frameCount % (int)((35*rate)/2) == 0){
         if (counter > 0) {
         counter -= .5;
         for (int i = -1; i <= 1; i++) {
@@ -175,7 +176,7 @@ class Gloomshroom extends Plant{
         }
       }else{
         counter = rate;  
-       }  
+      }
      }
     }else{
       if (frameCount % (35*rate) == 0) {
@@ -189,10 +190,11 @@ class Gloomshroom extends Plant{
               }
             }
           }
-        } else {
+        }
+        else {
           counter = rate;  
         }  
-     }
+       }
     }
   }
   
@@ -235,7 +237,7 @@ class SnowPea extends Plant{
   
   void attack() {
     if(fastForward){
-      if(frameCount % (int)(35*rate) / 2 == 0){
+      if(frameCount % (int)((35*rate)/2) == 0){
         if (counter > 0) {
         counter -= .5;
         Zombie target = null;
@@ -246,12 +248,13 @@ class SnowPea extends Plant{
           target.slowTimer = 300;
           //rect(0,0,10,10);
         }
-      }else {
+      }
+      else {
         counter = rate;  
-      }  
+      }
      }
     }else{
-    if (frameCount % (int)(35*rate) == 0) {
+    if(frameCount % (int)(35*rate) == 0) {
      if (counter > 0) {
         counter -= .5;
         Zombie target = null;
@@ -264,9 +267,9 @@ class SnowPea extends Plant{
         }
       }else {
         counter = rate;  
-      }  
-     }    
+      }
     }
+   }    
   }
   
   void applyEffects() {}

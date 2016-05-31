@@ -415,7 +415,7 @@ void moveZombies() {
       z.slow = 1;  
     }
     if(fastForward){
-      if(frameCount % (25*z.slow) == 0){
+      if(frameCount % ((50*z.slow)/2) == 0){
         if (!z.move()) {
           health -= z.health;
           toRemove.add(z);
