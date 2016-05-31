@@ -157,7 +157,7 @@ class Peashooter extends Plant{
 
 class Gloomshroom extends Plant{  
   public Gloomshroom() {
-    super(150,1.25,1,12,"Gloom-shroom"); 
+    super(150,1.25,1,13,"Gloom-shroom"); 
     letter = 'G';
   } 
   
@@ -202,28 +202,171 @@ class Gloomshroom extends Plant{
 }
 
 class Melonpult extends Plant{  
+  int blast;
+  
   public Melonpult() {
-    super(250,2,2,10,"Melon-pult"); 
+    super(250,2,1,12,"Melon-pult"); 
     letter = 'M';
+    blast = 4;
   } 
   
-  //void attack() {
-    
-  //}
+  void attack() {
+    if (frameCount % (int)(35*rate) == 0) {
+     if (counter > 0) {
+        counter -= .5;
+        Zombie target = null;
+        target = findNearestZombie();
+        if (target != null) {
+          //target.takeDamage(power);  
+          //coords[0] = y component or row
+          ArrayList<Zombie>toHit = new ArrayList<Zombie>();
+          int x = target.coords[0];
+          int y = target.coords[1];
+          for (int i = x-blast; i <= x+blast && i >= 0 && i < 68; i++) {
+            for (int j = y-blast; j <= y+blast && j >= 0 && j < 68; j++) {
+              if (area[i][j] instanceof Road) {
+                for (Zombie z: area[i][j].getZombies()) {
+                  toHit.add(z);
+                }
+              }
+            }
+          }
+          for (Zombie z: toHit) {
+            z.takeDamage(power);  
+          }
+        }
+      }
+      else {
+        counter = rate;  
+      }  
+   }
+  }
   
   void applyEffects() {}
 }
 
 
 class Bloomerang extends Plant{  
+  Boomerang b;
+  int [] target;
+  Zombie toHit;
+  float bRow;
+  float bCol;
+  float xDir = 1;
+  float yDir = 1;
+  float xChange;
+  float yChange;
+  boolean moveAway = false;
+  
+  class Boomerang {
+    int [] location = new int[2];
+    float [] unrounded = new float[2];
+    
+    public Boomerang() {}
+    
+    public Boomerang(int row, int col) {
+      setLocation(row,col);
+    }
+    
+    void setLocation(int row, int col) {
+      location[0] = row;
+      location[1] = col;
+      unrounded[0] = row;
+      unrounded[1] = col;
+    }
+    
+    void incrementLocation(float x, float y) {
+      unrounded[0] += y;
+      unrounded[1] += x;
+      location[0] = (int)(unrounded[0]);
+      location[1] = (int)(unrounded[1]);
+    }
+  }
+  
+  //
+  
+  float solveAngle(float x1, float y1, float x2, float y2) {
+    return atan(abs(y1-y2)/abs(x1-x2));
+  }
+  
+  float pythag(float x1, float y1, float x2, float y2) {
+    return sqrt((float)(Math.pow((x2-x1),2)+Math.pow((y2-y1),2)));  
+  }
+  
   public Bloomerang() {
-    super(200,1.5,1,12,"Bloomerang");  
+    super(200,1.5,1,13,"Bloomerang");  
+    b = new Boomerang();
     letter = 'B';
   } 
   
-  //void attack() {
-    
-  //}
+  boolean original() {
+    int X = (x-15)/10;
+    int Y = (y-15)/10;
+    if (abs(b.location[1] - X) <= 1 && abs(b.location[0] - Y) <= 1) {
+      return true;  
+    }
+    return false;  
+  }
+  
+  void moveBoom() {
+    if (moveAway && original()) {
+      toHit = null;
+      moveAway = false;
+    }
+    if (pythag((x-15)/10,(y-15)/10,b.location[1],b.location[0]) >= range) {
+      xChange *= -1;
+      yChange *= -1;
+    }
+    b.incrementLocation(xChange,yChange);
+    if (!moveAway && toHit != null) {
+      moveAway = true;  
+    }
+  }
+  
+  //need to put when to come back
+  void attack() {
+    if (toHit == null) {
+      toHit = findNearestZombie();  
+      if (toHit != null) {
+        bRow = y;
+        bCol = x;
+        System.out.println(toHit.coords[1] + "," + toHit.coords[0]);
+        System.out.println((x-15)/10 + "," + (y-15)/10);
+        float angle = solveAngle((x-15)/10,(y-15)/10,toHit.coords[1],toHit.coords[0]);
+        System.out.println("A: " + angle);
+        xChange = 3*cos(angle);
+        yChange = 3*sin(angle);
+        System.out.println(xChange + " " + yChange);
+        if (toHit.coords[0] < (y-15)/10) {
+            yChange *= -1;
+        }
+        if (toHit.coords[1] < (x-15)/10) {
+            xChange *= -1;
+        }
+        b.setLocation((int)(bRow-15)/10,(int)(bCol-15)/10);
+      }
+    }
+    else {
+      fill(color(0,255,0));
+      rect(b.location[1]*10,b.location[0]*10,10,10);
+      if (frameCount % 20 == 0) {
+        moveBoom();
+        fill(color(255,0,0));
+        rect((b.location[1]-1)*10,(b.location[0]-1)*10,30,30);
+        for (int i = b.location[0]-1; i <= b.location[0]+1 && i >= 0 && i < 68; i++) {
+          //System.out.println("shshshgs");
+          for (int j = b.location[1]-1; j <= b.location[1]+1 && j >= 0 && j < 68; j++) {
+            //System.out.println("checking");
+            if (area[i][j].getZombies() != null) {
+              for (Zombie z: area[i][j].getZombies()) {
+                z.takeDamage(power);  
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   
   void applyEffects() {}
 }
@@ -231,7 +374,7 @@ class Bloomerang extends Plant{
 
 class SnowPea extends Plant{  
   public SnowPea() {
-    super(125,2,1,12,"Snow_Pea");  
+    super(125,2,1,14,"Snow_Pea");  
     letter = 'S';
   } 
   

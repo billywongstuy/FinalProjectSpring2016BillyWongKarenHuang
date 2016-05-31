@@ -28,27 +28,7 @@ void setup() {
   image(map,0,0);
   text = loadFont("SeriesOrbit-16.vlw");
   textFont(text);
-  /*textSize(12);
-  for (int i = 0; i < area.length; i++) {
-    for (int j = 0; j < area[i].length; j++) {
-      
-      if (area[i][j] != null && area[i][j].getClass() == new Road().getClass()) {
-        fill(color(161,119,79));
-        rect(j*10,i*10,10,10);
-        fill(color(0));
-        if (area[i][j].startDistance != 0) {
-        text((area[i][j].startDistance)%10,j*10,(i*10+10));
-        }
-      }
-    }
-  }
-  //rect(480,120,10,10);*/
   setupLevels();
-  //levels = {l1,l2,l3,ltest};
-  //area[19][50].startDistance = 29;
-  //area[19][49].startDistance = 29;
-  //ltest.spawn();
-  //l1.spawn();
 }
 
 
@@ -65,7 +45,11 @@ void draw() {
   if(!levelStarted){
     text("Start Level",691,540);
   }else{
-    text("Fast Forward",681,540);
+    if(fastForward){
+      text("Normal Speed",681,540);
+    }else{
+      text("Fast Forward",681,540);
+    }
   }
   showPlant();
   displayPlanted();
@@ -130,7 +114,7 @@ void mouseClicked() {
   else if (mouseX >= 670 && mouseY >= 396 && mouseY <= 690) {
     fadeOut();
   }
-  else if (plantChosen != null && validLocation() && enoughMoney() && mouseX < 680) {
+  else if (plantChosen != null && validLocation() && enoughMoney() && mouseX < 680 && mouseY < 680) {
     area[mouseY/10][mouseX/10].placePlant(plantChosen); 
     sun -= plantChosen.cost;
     if (!(plantChosen instanceof Spikeweed)) {
@@ -146,10 +130,10 @@ void mouseClicked() {
       
     }
   }
-  else if (plantShowing != null && area[mouseY/10][mouseX/10].getPlant() == null) {
+  else if (plantShowing != null && mouseX < 680 && mouseY < 680 && area[mouseY/10][mouseX/10].getPlant() == null) {
       plantShowing = null;  
   }
-  else if (plantShowing != null && area[mouseY/10][mouseX/10].getPlant() != null && area[mouseY/10][mouseX/10].getPlant() != plantShowing) {
+  else if (plantShowing != null && mouseX < 680 && mouseY < 680 && area[mouseY/10][mouseX/10].getPlant() != null && area[mouseY/10][mouseX/10].getPlant() != plantShowing) {
       plantShowing = area[mouseY/10][mouseX/10].getPlant(); 
   }
 }

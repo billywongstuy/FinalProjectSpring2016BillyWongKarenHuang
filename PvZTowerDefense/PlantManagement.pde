@@ -78,7 +78,7 @@ void selectPlant() {
   else if (mouseX >= 740 && mouseX <= 788 && mouseY >= 324 && mouseY <= 390) {
     plantChosen = new Spikeweed();
   }
-  if (plantChosen.cost > sun) {
+  if (plantChosen != null && plantChosen.cost > sun) {
     plantChosen = null;  
   }
 }
