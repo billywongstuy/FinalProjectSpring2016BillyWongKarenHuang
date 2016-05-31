@@ -76,27 +76,24 @@ void draw() {
   displayZombies();
   moveZombies();
   plantsAttack();
-  if(levelStarted && frameCount % 90 == 0){
-    //System.out.println(ctr);
-    //System.out.println(Arrays.toString(levels));
-      levels[ctr].spawn();
-  }
-  if(levelStarted && alive.isEmpty()){
-    if(!fastForward){
-      if(frameCount % 90 == 0){
-        sun += levels[ctr].yield;
-        ctr++;
-        levelStarted = false;
-        fastForward = false;
+  if(levelStarted){
+    if(fastForward){
+      if(frameCount % 45 == 0){
+        //System.out.println(ctr);
+        //System.out.println(Arrays.toString(levels));
+        levels[ctr].spawn();
       }
     }else{
-      if(frameCount % 45 == 0){
+      if(frameCount % 90 == 0){
+        levels[ctr].spawn();
+      }
+    }
+  }
+  if(levelStarted && alive.isEmpty()){
         sun += levels[ctr].yield;
         ctr++;
         levelStarted = false;
         fastForward = false;
-      }
-    }
   }
   //System.out.println(fastForward);
 }
