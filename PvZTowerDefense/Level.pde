@@ -1,10 +1,11 @@
 class Level{
   
- public Level() {
-   
+ public Level(int y) {
+   yield = y;
  }
   
  List<Zombie>zombies= new LinkedList<Zombie>(); 
+ int yield = 0;
  
  void spawn(){
    //for(int i = 0;i < zombies.size();i++){
@@ -39,13 +40,22 @@ class Level{
   }
 }
 void setupLevels(){
-  l1 = new Level();
+  l1 = new Level(100);
   l1.addZombie(20, new Normal());
-  l2 = new Level();
+  l2 = new Level(150);
   l2.addZombie(30, new Normal());
-  l3 = new Level();
+  l3 = new Level(200);
   l3.addZombie(20, new Normal());
   l3.addZombie(5, new Cone());
+<<<<<<< HEAD
   ltest = new Level();
   ltest.addZombie(20,new Bucket());
+=======
+  ltest = new Level(100);
+  ltest.addZombie(1,new Normal());
+  levels[0] = l1;
+  levels[1] = l2;
+  levels[2] = l3;
+  levels[3] = ltest;
+>>>>>>> 0764f3e88343dea12afaf7973757b84288f6d84d
 }

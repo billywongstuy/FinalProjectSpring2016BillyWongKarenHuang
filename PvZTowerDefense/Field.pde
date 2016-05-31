@@ -352,8 +352,14 @@ void displayPlanted() {
   for (Crop c: planted) {
     fill(color(0,0,0));
     if (c.p.getClass() == new Sunflower().getClass()) {
-      if (frameCount % 180 == 0) {
-        fill(color(255,255,0));  
+      if(fastForward){
+        if(frameCount % 90 == 0){
+          fill(color(255,255,0));
+        }
+      }else{
+        if (frameCount % 180 == 0) {
+          fill(color(255,255,0));  
+        }
       }
     }
     //rect(c.col*10,c.row*10,30,30);
@@ -367,9 +373,6 @@ void displayPlanted() {
 }
 
 
-
-//FIRST PLANT NEAR ZOMBIE KILLS IT
-//TOO MUCH RANGE
 
 void checkZombieCond() {
   ArrayList<Zombie>toDie = new ArrayList<Zombie>();
@@ -388,15 +391,16 @@ void checkZombieCond() {
 
 
 void displayZombies(){
-  //zombies are going away but not dying
   for(Zombie z: alive){    
     fill(color(1,1,1));
     if (z.slow != 1) {
       fill(color(0,0,250));  
     }
-    ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
-    fill(color(255,255,255));
-    text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
+    //ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
+    //fill(color(255,255,255));
+    //text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
+    PImage photo= loadImage("../Zombies/" + z.type + ".png");
+    image(photo,z.coords[1]*10 - 50,z.coords[0]*10 - 70);
   }
 }
 
@@ -410,6 +414,7 @@ void moveZombies() {
     if (z.slowTimer == 0) {
       z.slow = 1;  
     }
+<<<<<<< HEAD
     //System.out.print(Arrays.toString(z.coords) + " ");
     if (frameCount % (50*z.slow) == 0) {
       if (!z.move()) {
@@ -417,6 +422,23 @@ void moveZombies() {
         toRemove.add(z);
       }
     }  
+=======
+    if(fastForward){
+      if(frameCount % ((50*z.slow)/2) == 0){
+        if (!z.move()) {
+          health -= z.health;
+          toRemove.add(z);
+        }
+      }
+    }else{
+      if (frameCount % (50*z.slow) == 0) {
+        if (!z.move()) {
+          health -= z.health;
+          toRemove.add(z);
+        }
+      }  
+    }
+>>>>>>> 0764f3e88343dea12afaf7973757b84288f6d84d
   }
   //System.out.println();
   for (Zombie z: toRemove) {
