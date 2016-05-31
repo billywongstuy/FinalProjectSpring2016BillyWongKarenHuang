@@ -63,7 +63,7 @@ void mouseClicked() {
   else if (mouseX >= 670 && mouseY >= 396 && mouseY <= 690) {
     fadeOut();
   }
-  else if (plantChosen != null && validLocation() && enoughMoney() && mouseX < 680) {
+  else if (plantChosen != null && validLocation() && enoughMoney() && mouseX < 680 && mouseY < 680) {
     area[mouseY/10][mouseX/10].placePlant(plantChosen); 
     sun -= plantChosen.cost;
     if (!(plantChosen instanceof Spikeweed)) {
@@ -79,10 +79,10 @@ void mouseClicked() {
       
     }
   }
-  else if (plantShowing != null && area[mouseY/10][mouseX/10].getPlant() == null) {
+  else if (plantShowing != null && mouseX < 680 && mouseY < 680 && area[mouseY/10][mouseX/10].getPlant() == null) {
       plantShowing = null;  
   }
-  else if (plantShowing != null && area[mouseY/10][mouseX/10].getPlant() != null && area[mouseY/10][mouseX/10].getPlant() != plantShowing) {
+  else if (plantShowing != null && mouseX < 680 && mouseY < 680 && area[mouseY/10][mouseX/10].getPlant() != null && area[mouseY/10][mouseX/10].getPlant() != plantShowing) {
       plantShowing = area[mouseY/10][mouseX/10].getPlant(); 
   }
 }
