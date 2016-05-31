@@ -145,7 +145,7 @@ class Peashooter extends Plant{
  // void attack() {
     //if counter > 0
     //set counter - (n)
-    
+     //<>//
     //closest zombie to end take damage  
     //then set counter to rate
     
@@ -376,7 +376,7 @@ class Bloomerang extends Plant{
 
 class SnowPea extends Plant{  
   public SnowPea() {
-    super(125,2,1,14,"Snow_Pea");  
+    super(125,2,1,14,"Snow Pea");  
     letter = 'S';
   } 
   

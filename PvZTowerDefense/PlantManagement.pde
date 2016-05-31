@@ -95,6 +95,7 @@ void dragPlant() {
     //image(p,mouseX-15,mouseY-15);
     fill(color(128,128,128));
     ellipse(mouseX,mouseY,30,30);
+    textSize(16);
     text(plantChosen.letter,mouseX,mouseY);
     surroundActive = false;   
   }
@@ -134,6 +135,13 @@ void showPlant() {
     fill(color(128,128,128,100));
     //need to fix the circle here for the coordinates
     ellipse(plantShowing.x,plantShowing.y,x,x);  
+    fill(color(8,133,213));
+    noStroke();
+    rect(15,745,130,38);
+    fill(color(0,0,0));
+    textSize(26);
+    text(plantShowing.name,15,725);
+    text("Sell: " + plantShowing.cost/2,15,775);
   }
 }
 
@@ -150,4 +158,21 @@ Plant removePlant(Plant p) {
     }
   }
   return p;
+}
+
+boolean sell() {
+  for (int i = (plantShowing.y-15)/10-1; i <= (plantShowing.y-15)/10+1; i++) {
+    for (int j = (plantShowing.x-15)/10-1; j <= (plantShowing.x-15)/10+1; j++) {
+      area[i][j].setPlant(null);  
+    }
+  }
+  for (int k = 0 ; k < planted.size(); k++) {
+    if (planted.get(k).p == plantShowing) {
+      planted.remove(k);
+      k--;
+    }
+  }
+  plantShowing = null;
+  System.out.println("sell bye");
+  return false;
 }

@@ -365,6 +365,7 @@ void displayPlanted() {
     //rect(c.col*10,c.row*10,30,30);
     ellipse(c.col*10+15,c.row*10+15,30,30); 
     fill(color(255,255,255));
+    textSize(16);
     text(c.p.letter,c.col*10+15,c.row*10+15);
     //PImage photo= loadImage("../Plants/" + c.p.name + "1.png");
     //image(photo,c.col*10,c.row*10);
@@ -414,15 +415,6 @@ void moveZombies() {
     if (z.slowTimer == 0) {
       z.slow = 1;  
     }
-<<<<<<< HEAD
-    //System.out.print(Arrays.toString(z.coords) + " ");
-    if (frameCount % (50*z.slow) == 0) {
-      if (!z.move()) {
-        health -= z.health;
-        toRemove.add(z);
-      }
-    }  
-=======
     if(fastForward){
       if(frameCount % ((50*z.slow)/2) == 0){
         if (!z.move()) {
@@ -438,7 +430,6 @@ void moveZombies() {
         }
       }  
     }
->>>>>>> 0764f3e88343dea12afaf7973757b84288f6d84d
   }
   //System.out.println();
   for (Zombie z: toRemove) {

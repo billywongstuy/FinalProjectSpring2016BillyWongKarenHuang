@@ -29,24 +29,12 @@ void setup() {
   text = loadFont("SeriesOrbit-16.vlw");
   textFont(text);
   setupLevels();
-<<<<<<< HEAD
-  //for (Square r: path) {
-  //  System.out.print(Arrays.toString(r.coords) + " ");  
-  //}
-=======
-  //levels = {l1,l2,l3,ltest};
-  //area[19][50].startDistance = 29;
-  //area[19][49].startDistance = 29;
->>>>>>> 0764f3e88343dea12afaf7973757b84288f6d84d
-  //ltest.spawn();
-  //for (int i = 0; i < 10; i++) {
-  //moveZombies();
-  //}
 }
 
 
 void draw() {
   image(map,0,0);
+  textSize(16);
   fill(color(0,0,0));
   text(sun,686,68);
   text(health,746,68);
@@ -69,10 +57,6 @@ void draw() {
   displayZombies();
   moveZombies();
   plantsAttack();
-<<<<<<< HEAD
-  if(frameCount % 90 == 0){
-    ltest.spawn();
-=======
   if(fastForward){
     if(levelStarted && frameCount % 45 == 0){
       levels[ctr].spawn();
@@ -100,7 +84,6 @@ void draw() {
         fastForward = false;
       }
     }
->>>>>>> 0764f3e88343dea12afaf7973757b84288f6d84d
   }
   //System.out.println(fastForward);
 }
@@ -138,6 +121,10 @@ void mouseClicked() {
       plantShowing = area[mouseY/10][mouseX/10].getPlant();
       
     }
+  }
+  //change
+  else if (plantShowing != null && mouseX <= 10 && mouseY >= 680) {
+    sell();  
   }
   else if (plantShowing != null && mouseX < 680 && mouseY < 680 && area[mouseY/10][mouseX/10].getPlant() == null) {
       plantShowing = null;  

@@ -47,15 +47,10 @@ void setupLevels(){
   l3 = new Level(200);
   l3.addZombie(20, new Normal());
   l3.addZombie(5, new Cone());
-<<<<<<< HEAD
-  ltest = new Level();
-  ltest.addZombie(20,new Bucket());
-=======
   ltest = new Level(100);
   ltest.addZombie(1,new Normal());
   levels[0] = l1;
   levels[1] = l2;
   levels[2] = l3;
   levels[3] = ltest;
->>>>>>> 0764f3e88343dea12afaf7973757b84288f6d84d
 }
