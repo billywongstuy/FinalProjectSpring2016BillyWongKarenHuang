@@ -80,20 +80,14 @@ void draw() {
         fastForward = false;
       }
     }else{
-      if(frameCount % 90 == 0){
-        levels[ctr].spawn();
-        //System.out.println("spawn");
-      }
-    }
-  }
-  if(levelStarted && alive.isEmpty()){
+      if(frameCount % 45 == 0){
         sun += levels[ctr].yield;
         ctr++;
         levelStarted = false;
         fastForward = false;
-        //System.out.println("FIN");
+      }
+    }
   }
-  //System.out.println(fastForward);
 }
 
 void mouseClicked() {
