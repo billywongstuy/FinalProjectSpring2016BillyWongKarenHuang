@@ -222,6 +222,7 @@ class Bloomerang extends Plant{
   float yDir = 1;
   float xChange;
   float yChange;
+  boolean moveAway = false;
   
   class Boomerang {
     int [] location = new int[2];
@@ -254,17 +255,41 @@ class Bloomerang extends Plant{
     return atan(abs(y1-y2)/abs(x1-x2));
   }
   
+  float pythag(float x1, float y1, float x2, float y2) {
+    return sqrt((float)(Math.pow((x2-x1),2)+Math.pow((y2-y1),2)));  
+  }
+  
   public Bloomerang() {
     super(200,1.5,1,13,"Bloomerang");  
     b = new Boomerang();
     letter = 'B';
   } 
   
-  void moveBoom() {
-    b.incrementLocation(xChange,yChange);
+  boolean original() {
+    int X = (x-15)/10;
+    int Y = (y-15)/10;
+    if (abs(b.location[1] - X) <= 1 && abs(b.location[0] - Y) <= 1) {
+      return true;  
+    }
+    return false;  
   }
   
+  void moveBoom() {
+    if (moveAway && original()) {
+      toHit = null;
+      moveAway = false;
+    }
+    if (pythag((x-15)/10,(y-15)/10,b.location[1],b.location[0]) >= range) {
+      xChange *= -1;
+      yChange *= -1;
+    }
+    b.incrementLocation(xChange,yChange);
+    if (!moveAway && toHit != null) {
+      moveAway = true;  
+    }
+  }
   
+  //need to put when to come back
   void attack() {
     if (toHit == null) {
       toHit = findNearestZombie();  
@@ -290,7 +315,7 @@ class Bloomerang extends Plant{
     else {
       fill(color(0,255,0));
       rect(b.location[1]*10,b.location[0]*10,10,10);
-      if (frameCount % 40 == 0) {
+      if (frameCount % 20 == 0) {
         moveBoom();
         fill(color(255,0,0));
         rect((b.location[1]-1)*10,(b.location[0]-1)*10,30,30);
