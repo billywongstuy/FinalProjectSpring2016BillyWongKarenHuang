@@ -96,8 +96,9 @@ abstract class Plant {
  
  
  void attack() {
-   if (frameCount % (int)(35*rate) == 0) {
-     if (counter > 0) {
+   if(fastForward){
+     if(frameCount % (int)((35*rate)/2) == 0){
+       if (counter > 0) {
         counter -= .5;
         Zombie target = null;
         target = findNearestZombie();
@@ -108,7 +109,23 @@ abstract class Plant {
       }
       else {
         counter = rate;  
-      }  
+      }
+     }
+   }else{
+     if (frameCount % (int)(35*rate) == 0) {
+       if (counter > 0) {
+          counter -= .5;
+          Zombie target = null;
+          target = findNearestZombie();
+          if (target != null) {
+            target.takeDamage(power);  
+            //rect(0,0,10,10);
+          }
+        }
+        else {
+          counter = rate;  
+        }
+     }
    }
  }
  
@@ -146,8 +163,9 @@ class Gloomshroom extends Plant{
   } 
   
   void attack() { //<>//
-    if (frameCount % (35*rate) == 0) {
-     if (counter > 0) {
+    if(fastForward){
+      if(frameCount % (int)((35*rate)/2) == 0){
+        if (counter > 0) {
         counter -= .5;
         for (int i = -1; i <= 1; i++) {
           for (int j = -1; j <= 1; j++) {
@@ -160,8 +178,26 @@ class Gloomshroom extends Plant{
       }
       else {
         counter = rate;  
-      }  
-   }
+      }
+     }
+    }else{
+      if (frameCount % (35*rate) == 0) {
+       if (counter > 0) {
+          counter -= .5;
+          for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+              Zombie target = findNearestZombie(i,j);
+              if (target != null) {
+                target.takeDamage(power);  
+              }
+            }
+          }
+        }
+        else {
+          counter = rate;  
+        }  
+       }
+    }
   }
   
   void applyEffects() {}
@@ -202,7 +238,25 @@ class SnowPea extends Plant{
   } 
   
   void attack() {
-    if (frameCount % (int)(35*rate) == 0) {
+    if(fastForward){
+      if(frameCount % (int)((35*rate)/2) == 0){
+        if (counter > 0) {
+        counter -= .5;
+        Zombie target = null;
+        target = findNearestZombie();
+        if (target != null) {
+          target.takeDamage(power);  
+          target.slow = 0.9;
+          target.slowTimer = 300;
+          //rect(0,0,10,10);
+        }
+      }
+      else {
+        counter = rate;  
+      }
+     }
+    }else{
+    if(frameCount % (int)(35*rate) == 0) {
      if (counter > 0) {
         counter -= .5;
         Zombie target = null;
@@ -216,7 +270,8 @@ class SnowPea extends Plant{
       }
       else {
         counter = rate;  
-      }  
+      }
+    }
    }    
   }
   
@@ -247,8 +302,14 @@ class Sunflower extends Plant{
   } 
   
   void attack() {
-    if (frameCount % 180 == 0) {
-      sun += 25;
+    if(fastForward){
+      if(frameCount % 90 == 0){
+        sun += 25;
+      }
+    }else{
+      if (frameCount % 180 == 0) {
+        sun += 25;
+      }
     }
   }
   
