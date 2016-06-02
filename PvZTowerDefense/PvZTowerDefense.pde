@@ -117,13 +117,14 @@ void mouseClicked() {
     }
   }
   else if (plantChosen == null && plantShowing == null) {
-    if (mouseX < 680 && area[mouseY/10][mouseX/10].getPlant() !=  null) {
+    if (mouseX < 680 && mouseY < 680 && area[mouseY/10][mouseX/10].getPlant() !=  null) {
       plantShowing = area[mouseY/10][mouseX/10].getPlant();
       
     }
   }
   //change
-  else if (plantShowing != null && mouseX <= 10 && mouseY >= 680) {
+  //rect(15,745,130,38);
+  else if (plantShowing != null && mouseX >= 15 && mouseX <= 145 && mouseY >= 745 && mouseY <= 783) {
     sell();  
   }
   else if (plantShowing != null && mouseX < 680 && mouseY < 680 && area[mouseY/10][mouseX/10].getPlant() == null) {

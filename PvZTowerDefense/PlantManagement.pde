@@ -142,6 +142,9 @@ void showPlant() {
     textSize(26);
     text(plantShowing.name,15,725);
     text("Sell: " + plantShowing.cost/2,15,775);
+    fill(color(255,0,0));
+    rect(230,690,275,110);
+    rect(520,690,275,110);
   }
 }
 
@@ -161,8 +164,9 @@ Plant removePlant(Plant p) {
 }
 
 boolean sell() {
-  for (int i = (plantShowing.y-15)/10-1; i <= (plantShowing.y-15)/10+1; i++) {
-    for (int j = (plantShowing.x-15)/10-1; j <= (plantShowing.x-15)/10+1; j++) {
+  //the plant heres are not setting right
+  for (int i = (plantShowing.y-15)/10; i <= (plantShowing.y-15)/10+2; i++) {
+    for (int j = (plantShowing.x-15)/10; j <= (plantShowing.x-15)/10+2; j++) {
       area[i][j].setPlant(null);  
     }
   }
@@ -172,6 +176,7 @@ boolean sell() {
       k--;
     }
   }
+  sun += plantShowing.cost/2;
   plantShowing = null;
   System.out.println("sell bye");
   return false;

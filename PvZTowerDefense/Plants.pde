@@ -1,5 +1,6 @@
 abstract class Plant {
- int [] upgrade = new int[2];
+ UpgradeChain [] upgrades = new UpgradeChain[2];
+ int [] upgradeStatus = {0,0};
  int cost;
  double rate; //1 per how many seconds
  int power;
@@ -12,6 +13,7 @@ abstract class Plant {
  int x;
  int y;
  double counter;
+ int pierce;
  
  public Plant(int c, double r, int p, double ra, String n) {
    cost = c;
@@ -23,6 +25,7 @@ abstract class Plant {
    name = n;
    sRange = range*10;
    counter = rate;
+   pierce = 1;
  }
  
   void setX() {
@@ -40,6 +43,10 @@ abstract class Plant {
   void setY(int Y) {
     y = Y*10+15;  
   }
+  
+  void setSpecial(float amount) {}
+  
+  void setSpecial(boolean b) {}
  
  
   Zombie findNearestZombie() {
@@ -102,8 +109,12 @@ abstract class Plant {
         counter -= .5;
         Zombie target = null;
         target = findNearestZombie();
+        int [] coords = target.coords;
         if (target != null) {
-          target.takeDamage(power);  
+          //target.takeDamage(power); 
+          for (int i = 0; i < pierce; i++) {
+            area[coords[0]][coords[1]].getZombies().get(i).takeDamage(power);    
+          }
           //rect(0,0,10,10);
         }
       }
@@ -140,6 +151,8 @@ class Peashooter extends Plant{
   public Peashooter() {
     super(100,1,1,15,"Peashooter"); 
     letter = 'P';
+    upgrades[0] = new UpgradeChain("range",2,50,"range",3,75);
+    upgrades[1] = new UpgradeChain("pierce",1,100,"pierce",1,80);
   } 
   
  // void attack() {
@@ -160,6 +173,8 @@ class Gloomshroom extends Plant{
   public Gloomshroom() {
     super(150,1.25,1,13,"Gloom-shroom"); 
     letter = 'G';
+    upgrades[0] = new UpgradeChain("rate",.25,75,"pierce",1,100);
+    upgrades[1] = new UpgradeChain("range",2,75,"range",3,75);
   } 
   
   void attack() { //<>//
@@ -170,8 +185,12 @@ class Gloomshroom extends Plant{
         for (int i = -1; i <= 1; i++) {
           for (int j = -1; j <= 1; j++) {
             Zombie target = findNearestZombie(i,j);
+            int [] coords = target.coords;
             if (target != null) {
-              target.takeDamage(power);  
+              //target.takeDamage(power); 
+              for (int k = 0; k < pierce; k++) {
+                area[coords[0]][coords[1]].getZombies().get(k).takeDamage(power);    
+              }
             }
           }
         }
@@ -187,8 +206,12 @@ class Gloomshroom extends Plant{
           for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
               Zombie target = findNearestZombie(i,j);
+              int [] coords = target.coords;
               if (target != null) {
-                target.takeDamage(power);  
+                //target.takeDamage(power);  
+                for (int k = 0; k < pierce; k++) {
+                  area[coords[0]][coords[1]].getZombies().get(k).takeDamage(power);    
+                }
               }
             }
           }
@@ -204,12 +227,14 @@ class Gloomshroom extends Plant{
 }
 
 class Melonpult extends Plant{  
-  int blast;
+  int blast = 4;
+  boolean slow = false;
   
   public Melonpult() {
     super(250,2,1,12,"Melon-pult"); 
     letter = 'M';
-    blast = 4;
+    upgrades[0] = new UpgradeChain("blast",3,150,"winter",0,300);
+    upgrades[1] = new UpgradeChain("range",3,150,"rate",1,150);
   } 
   
   void attack() {
@@ -235,6 +260,10 @@ class Melonpult extends Plant{
           }
           for (Zombie z: toHit) {
             z.takeDamage(power);  
+            if (slow) {
+              target.slow = 0.9;
+              target.slowTimer = 300;  
+            }
           }
         }
       }
@@ -242,6 +271,14 @@ class Melonpult extends Plant{
         counter = rate;  
       }  
    }
+  }
+  
+  void setSpecial(float amount) {
+    blast += amount;  
+  }
+  
+  void setSpecial(boolean b) {
+    slow = true;    
   }
   
   void applyEffects() {}
@@ -299,6 +336,9 @@ class Bloomerang extends Plant{
     super(200,1.5,1,13,"Bloomerang");  
     b = new Boomerang();
     letter = 'B';
+    rate = 20;
+    upgrades[0] = new UpgradeChain("range",2,75,"range",3,100);
+    upgrades[1] = new UpgradeChain("rate",4,60,"rate",3,75);
   } 
   
   boolean original() {
@@ -351,7 +391,7 @@ class Bloomerang extends Plant{
     else {
       fill(color(0,255,0));
       rect(b.location[1]*10,b.location[0]*10,10,10);
-      if (frameCount % 20 == 0) {
+      if (frameCount % rate == 0) {
         moveBoom();
         fill(color(255,0,0));
         rect((b.location[1]-1)*10,(b.location[0]-1)*10,30,30);
@@ -374,10 +414,18 @@ class Bloomerang extends Plant{
 }
 
 
+//need to implement spreading
+
 class SnowPea extends Plant{  
+  float slowEffect = 0.9;
+  float slowLength = 300;
+  boolean spread = false;
+  
   public SnowPea() {
     super(125,2,1,14,"Snow Pea");  
     letter = 'S';
+    upgrades[0] = new UpgradeChain("range",2,60,"spread",0,100);
+    upgrades[1] = new UpgradeChain("slower",40,75,"rate",3,75);
   } 
   
   void attack() {
@@ -389,7 +437,7 @@ class SnowPea extends Plant{
         target = findNearestZombie();
         if (target != null) {
           target.takeDamage(power);  
-          target.slow = 0.9;
+          target.slow = slowEffect;
           target.slowTimer = 300;
           //rect(0,0,10,10);
         }
@@ -406,7 +454,7 @@ class SnowPea extends Plant{
         target = findNearestZombie();
         if (target != null) {
           target.takeDamage(power);  
-          target.slow = 0.9;
+          target.slow = slowEffect;
           target.slowTimer = 300;
           //rect(0,0,10,10);
         }
@@ -418,6 +466,16 @@ class SnowPea extends Plant{
    }    
   }
   
+  
+  void setSpecial(float amount) {
+    slowLength += amount;  
+  }
+  
+  
+  void setSpecial(boolean b) {
+    spread = true;  
+  }
+  
   void applyEffects() {}
 }
 
@@ -426,6 +484,9 @@ class Repeater extends Plant{
   public Repeater() {
     super(400,0.8,2,20,"Repeater");  
     letter = 'R';
+    upgrades[0] = new UpgradeChain("range",3,110,"rate",.1,75);
+    upgrades[1] = new UpgradeChain("pierce",1,80,"power",1,200);
+    
   } 
   
   //void attack() {
@@ -438,22 +499,31 @@ class Repeater extends Plant{
 }
 
 
-class Sunflower extends Plant{  
+class Sunflower extends Plant{ 
+  int yield = 25;
+  
   public Sunflower() {
     super(150,3,0,5,"Sunflower");  
     letter = 'F';
+    rate = 180;
+    upgrades[0] = new UpgradeChain("yield",15,100,"yield",20,150);
+    upgrades[1] = new UpgradeChain("rate",30,100,"yield",25,250);
   } 
   
   void attack() {
     if(fastForward){
-      if(frameCount % 90 == 0){
-        sun += 25;
+      if(frameCount % rate/2 == 0){
+        sun += yield;
       }
     }else{
-      if (frameCount % 180 == 0) {
-        sun += 25;
+      if (frameCount % rate == 0) {
+        sun += yield;
       }
     }
+  }
+  
+  void setSpecial(float amount) {
+    yield += amount;  
   }
   
 }
