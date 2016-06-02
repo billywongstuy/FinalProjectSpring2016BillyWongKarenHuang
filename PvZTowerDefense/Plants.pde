@@ -95,9 +95,8 @@ abstract class Plant {
   }
  
  
- void attack() {
-   if(fastForward){
-     if(frameCount % (int)((35*rate)/2) == 0){
+  void attack() {
+     if(frameCount % (int)((35*rate) * fastForward) == 0){
        if (counter > 0) {
         counter -= .5;
         Zombie target = null;
@@ -109,23 +108,7 @@ abstract class Plant {
       }else {
         counter = rate;  
       }
-     }
-   }else{
-     if (frameCount % (int)(35*rate) == 0) {
-       if (counter > 0) {
-          counter -= .5;
-          Zombie target = null;
-          target = findNearestZombie();
-          if (target != null) {
-            target.takeDamage(power);  
-            //rect(0,0,10,10);
-          }
-        }
-        else {
-          counter = rate;  
-        }
-     }
-   }
+    }
  }
  
  
@@ -161,9 +144,8 @@ class Gloomshroom extends Plant{
     letter = 'G';
   } 
   
-  void attack() { //<>//
-    if(fastForward){ //<>//
-      if(frameCount % (int)((35*rate)/2) == 0){
+  void attack() { //<>// //<>//
+      if(frameCount % (int)((35*rate) * fastForward) == 0){
         if (counter > 0) {
         counter -= .5;
         for (int i = -1; i <= 1; i++) {
@@ -177,24 +159,6 @@ class Gloomshroom extends Plant{
       }else{
         counter = rate;  
       }
-     }
-    }else{
-      if (frameCount % (35*rate) == 0) {
-       if (counter > 0) {
-          counter -= .5;
-          for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
-              Zombie target = findNearestZombie(i,j);
-              if (target != null) {
-                target.takeDamage(power);  
-              }
-            }
-          }
-        }
-        else {
-          counter = rate;  
-        }  
-       }
     }
   }
   
@@ -211,7 +175,7 @@ class Melonpult extends Plant{
   } 
   
   void attack() {
-    if (frameCount % (int)(35*rate) == 0) {
+    if (frameCount % (int)((35*rate) * fastForward) == 0) {
      if (counter > 0) {
         counter -= .5;
         Zombie target = null;
@@ -349,7 +313,7 @@ class Bloomerang extends Plant{
     else {
       fill(color(0,255,0));
       rect(b.location[1]*10,b.location[0]*10,10,10);
-      if (frameCount % 20 == 0) {
+      if (frameCount % (20 * fastForward) == 0) {
         moveBoom();
         fill(color(255,0,0));
         rect((b.location[1]-1)*10,(b.location[0]-1)*10,30,30);
@@ -379,8 +343,7 @@ class SnowPea extends Plant{
   } 
   
   void attack() {
-    if(fastForward){
-      if(frameCount % (int)((35*rate)/2) == 0){
+      if(frameCount % (int)((35*rate) * fastForward) == 0){
         if (counter > 0) {
         counter -= .5;
         Zombie target = null;
@@ -395,24 +358,7 @@ class SnowPea extends Plant{
       else {
         counter = rate;  
       }
-     }
-    }else{
-    if(frameCount % (int)(35*rate) == 0) {
-     if (counter > 0) {
-        counter -= .5;
-        Zombie target = null;
-        target = findNearestZombie();
-        if (target != null) {
-          target.takeDamage(power);  
-          target.slow = 0.9;
-          target.slowTimer = 300;
-          //rect(0,0,10,10);
-        }
-      }else {
-        counter = rate;  
-      }
-    }
-   }    
+    }  
   }
   
   void applyEffects() {}
@@ -442,14 +388,8 @@ class Sunflower extends Plant{
   } 
   
   void attack() {
-    if(fastForward){
-      if(frameCount % 90 == 0){
-        sun += 25;
-      }
-    }else{
-      if (frameCount % 180 == 0) {
-        sun += 25;
-      }
+    if (frameCount % (180 * fastForward) == 0) {
+      sun += 25;
     }
   }
   

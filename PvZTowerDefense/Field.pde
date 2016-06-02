@@ -352,15 +352,9 @@ void displayPlanted() {
   for (Crop c: planted) {
     fill(color(0,0,0));
     if (c.p.getClass() == new Sunflower().getClass()) {
-      if(fastForward){
-        if(frameCount % 90 == 0){
+        if(frameCount % (180 * fastForward) == 0){
           fill(color(255,255,0));
         }
-      }else{
-        if (frameCount % 180 == 0) {
-          fill(color(255,255,0));  
-        }
-      }
     }
     //rect(c.col*10,c.row*10,30,30);
     ellipse(c.col*10+15,c.row*10+15,30,30); 
@@ -414,20 +408,11 @@ void moveZombies() {
     if (z.slowTimer == 0) {
       z.slow = 1;  
     }
-    if(fastForward){
-      if(frameCount % ((50*z.slow)/2) == 0){
+      if(frameCount % ((50*z.slow) * fastForward) == 0){
         if (!z.move()) {
           health -= z.health;
           toRemove.add(z);
-        }
       }
-    }else{
-      if (frameCount % (50*z.slow) == 0) {
-        if (!z.move()) {
-          health -= z.health;
-          toRemove.add(z);
-        }
-      }  
     }
   }
   //System.out.println();

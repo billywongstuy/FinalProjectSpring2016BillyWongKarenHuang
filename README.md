@@ -30,21 +30,31 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 ##Development Log##
 
+### 6/2/16 ###
+
+-Changed fastForward to an int (less typing!)
+
 ### 5/30/16 ###
 
 -Bloomerang (not finished)
 
 -Some bug fixes
 
+-Fast forward fully implemented
 
 ### 5/27/16 ###
 
 -Melon-pults and Snow-peas
 
+-Zombie pics are displayed
+
+-Added start button and fast forward button
 
 ### 5/26/16 ###
 
 -Sunflowers and Spikeweeds
+
+-Sun gets added to total when level finishes/zombie dies
 
 
 ### 5/25/16 ###
@@ -56,6 +66,7 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 -Fixed plant targetting issues (for now)
 
+-Started implementing level changing
 
 ### 5/22/16 ###
 

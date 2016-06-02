@@ -16,7 +16,7 @@ Level l1,l2,l3,ltest;
 Level[] levels = new Level[4];  //set up in setupLevels()
 int ctr = 0;
 boolean levelStarted = false;
-boolean fastForward = false;
+float fastForward = 1;
 
 void setup() {
   size(800,800);
@@ -45,7 +45,7 @@ void draw() {
   if(!levelStarted){
     text("Start Level",691,540);
   }else{
-    if(fastForward){
+    if(fastForward != 1){
       text("Normal Speed",681,540);
     }else{
       text("Fast Forward",681,540);
@@ -60,32 +60,15 @@ void draw() {
   displayZombies();
   moveZombies();
   plantsAttack();
-  if(fastForward){
-    if(levelStarted && frameCount % 45 == 0){
-      levels[ctr].spawn();
-    }
-  }else{
-    if(levelStarted && frameCount % 90 == 0){
-      //System.out.println(ctr);
-      //System.out.println(Arrays.toString(levels));
-        levels[ctr].spawn();
-    }
+  if(levelStarted && frameCount % (90 * fastForward) == 0){
+    levels[ctr].spawn();
   }
   if(levelStarted && alive.isEmpty()){
-    if(!fastForward){
-      if(frameCount % 90 == 0){
+    if(frameCount % (90 * fastForward) == 0){
         sun += levels[ctr].yield;
         ctr++;
         levelStarted = false;
-        fastForward = false;
-      }
-    }else{
-      if(frameCount % 45 == 0){
-        sun += levels[ctr].yield;
-        ctr++;
-        levelStarted = false;
-        fastForward = false;
-      }
+        fastForward = 1;
     }
   }
 }
@@ -99,10 +82,10 @@ void mouseClicked() {
   else if (mouseX >= 675 && mouseY >= 510 && mouseY <= 560){
     if(!levelStarted && ctr < levels.length){
       levelStarted = true;
-    }else if(!fastForward){
-      fastForward = true;
+    }else if(fastForward == 1){
+      fastForward = .5;
     }else{
-      fastForward = false;
+      fastForward = 1;
     }
   }
   else if (mouseX >= 670 && mouseY >= 396 && mouseY <= 690) {
