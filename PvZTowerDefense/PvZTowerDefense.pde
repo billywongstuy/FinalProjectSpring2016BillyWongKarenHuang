@@ -5,15 +5,16 @@ Square [][] area = new Square[68][68];
 PImage map;
 PImage bar;
 PImage field;
+PImage death;
+PImage z1, z2, z3, z4, z5;
 PFont text;
 Plant plantChosen = null;
 Plant plantShowing = null;
 boolean surroundActive;
 int sun = 9999;  //300
-int health = 200;
+int health = 1; //200
 List<Zombie> layout = new LinkedList<Zombie>();
-Level l1,l2,l3,ltest;
-Level[] levels = new Level[4];  //set up in setupLevels()
+Level[] levels = new Level[11];  //set up in setupLevels()
 int ctr = 0;
 boolean levelStarted = false;
 float fastForward = 1;
@@ -25,6 +26,7 @@ void setup() {
   map = loadImage("../map.png");
   bar = loadImage("../Plants/plantsbar.png");
   field = loadImage("../field.png");
+  death = loadImage("../goodbyebrains.png");
   image(map,0,0);
   text = loadFont("SeriesOrbit-16.vlw");
   textFont(text);
@@ -112,5 +114,12 @@ void mouseClicked() {
   }
   else if (plantShowing != null && mouseX < 680 && mouseY < 680 && area[mouseY/10][mouseX/10].getPlant() != null && area[mouseY/10][mouseX/10].getPlant() != plantShowing) {
       plantShowing = area[mouseY/10][mouseX/10].getPlant(); 
+  }
+}
+
+void dead(){
+  if(health == 0){
+    image(death,0,0);
+    alive = null;
   }
 }
