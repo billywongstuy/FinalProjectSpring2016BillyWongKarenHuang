@@ -55,6 +55,7 @@ void draw() {
   surroundChoice();
   checkZombieCond();
   displayZombies();
+  displayCosts();
   moveZombies();
   plantsAttack();
   if(fastForward){

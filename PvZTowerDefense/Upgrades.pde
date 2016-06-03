@@ -70,14 +70,18 @@ class UpgradeChain {
   
   public UpgradeChain(String e1, float a1, float c1, String n1, String e2, float a2, float c2) {
     fill(e1, a1, c1, n1, e2, a2, c2, e2);  
+    System.out.println("u1");
   }
   
   public UpgradeChain(String e1, float a1, float c1, String e2, float a2, float c2, String n2) {
     fill(e1, a1, c1, e1, e2, a2, c2, n2);  
+    System.out.println("u2");
   }
   
    public UpgradeChain(String e1, float a1, float c1, String n1, String e2, float a2, float c2, String n2) {
     fill(e1, a1, c1, n1, e2, a2, c2, n2);  
+    System.out.println("both");
+    System.out.println(n1 + " " + n2);
   }
   
   
@@ -86,9 +90,19 @@ class UpgradeChain {
     chain[1] = new Upgrade(e2,a2,c2);
   }
   
-  void fill(String e1, float a1, float c1, String n1, String e2, float a2, float c2, String n2) {
-    chain[0] = new Upgrade(e1,a1,c1);
+  void fill(String e1, float a1, float c1, String n1, String e2, float a2, float c2) {
+    chain[0] = new Upgrade(e1,a1,c1,n1);
     chain[1] = new Upgrade(e2,a2,c2);
+  }
+  
+  void fill(String e1, float a1, float c1, String e2, float a2, float c2, String n2) {
+    chain[0] = new Upgrade(e1,a1,c1);
+    chain[1] = new Upgrade(e2,a2,c2,n2);
+  }
+  
+  void fill(String e1, float a1, float c1, String n1, String e2, float a2, float c2, String n2) {
+    chain[0] = new Upgrade(e1,a1,c1,n1);
+    chain[1] = new Upgrade(e2,a2,c2,n2);
   }
   
   
