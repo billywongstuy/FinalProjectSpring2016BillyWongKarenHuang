@@ -15,7 +15,7 @@ int sun = 300;
 int health = 200;
 List<Zombie> layout = new LinkedList<Zombie>();
 Level[] levels = new Level[10];  //set up in setupLevels()
-int ctr = 9;
+int ctr = 0;
 boolean levelStarted = false;
 float fastForward = 1;
 boolean dead = false;
@@ -67,6 +67,7 @@ void draw() {
   surroundChoice();
   checkZombieCond();
   displayZombies();
+  displayCosts();
   moveZombies();
   plantsAttack();
   if(levelStarted && frameCount % (90 * fastForward) == 0){
@@ -128,11 +129,27 @@ void mouseClicked() {
   else if (plantShowing != null && mouseX < 680 && mouseY < 680 && area[mouseY/10][mouseX/10].getPlant() != null && area[mouseY/10][mouseX/10].getPlant() != plantShowing) {
       plantShowing = area[mouseY/10][mouseX/10].getPlant(); 
   }
+  else if (plantShowing != null && mouseX >= 230 && mouseX <= 505 && mouseY >= 690) {
+    Upgrade u = plantShowing.upgrades[0].get(plantShowing.upgradeStatus[0]);
+    if (plantShowing.upgradeStatus[0] <= 1 && sun >= u.cost) {
+      sun -= u.cost;
+      u.applyUpgrade(plantShowing);
+      plantShowing.upgradeStatus[0] += 1;
+    }
+  }
+  else if (plantShowing != null && mouseX >= 520 && mouseX <= 795 && mouseY >= 690) {
+    Upgrade u = plantShowing.upgrades[1].get(plantShowing.upgradeStatus[1]);
+    if (plantShowing.upgradeStatus[1] <= 1 && sun >= u.cost) {
+      sun -= u.cost;
+      u.applyUpgrade(plantShowing);
+      plantShowing.upgradeStatus[1] += 1;
+    }
+  }
 }
 
 void dead(){
   if(health <= 0){
-    image(death,0,0);
+    image(death,0,0,800,800);
     alive = null;
     dead = true;
   }

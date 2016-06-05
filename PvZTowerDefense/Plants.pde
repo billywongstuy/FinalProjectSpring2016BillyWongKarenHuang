@@ -133,8 +133,9 @@ class Peashooter extends Plant{
   public Peashooter() {
     super(100,1,1,15,"Peashooter"); 
     letter = 'P';
-    upgrades[0] = new UpgradeChain("range",2,50,"range",3,75);
-    upgrades[1] = new UpgradeChain("pierce",1,100,"pierce",1,80);
+    upgrades[0] = new UpgradeChain("range",2,50,"range increase","range",3,75,"range increase");
+    upgrades[1] = new UpgradeChain("pierce",1,100,"Piercing effect","pierce",1,80,"Pierce more");
+    System.out.println(upgrades[0].get(0).name);
   } 
   
  // void attack() {
@@ -155,8 +156,8 @@ class Gloomshroom extends Plant{
   public Gloomshroom() {
     super(150,1.25,1,13,"Gloom-shroom"); 
     letter = 'G';
-    upgrades[0] = new UpgradeChain("rate",.25,75,"pierce",1,100);
-    upgrades[1] = new UpgradeChain("range",2,75,"range",3,75);
+    upgrades[0] = new UpgradeChain("rate",.25,75,"faster","pierce",1,100,"Piercing effect");
+    upgrades[1] = new UpgradeChain("range",2,75,"range increase","range",3,75,"range increase");
   } 
   
     void attack() { //<>// //<>//
@@ -167,15 +168,19 @@ class Gloomshroom extends Plant{
           for (int j = -1; j <= 1; j++) {
             Zombie target = findNearestZombie(i,j);
             if (target != null) {
-              target.takeDamage(power);  
+              int [] coords = target.coords;
+              //target.takeDamage(power); 
+              for (int k = 0; k < pierce; k++) {
+                area[coords[0]][coords[1]].getZombies().get(k).takeDamage(power);    
+              }
             }
           }
         }
       }else{
         counter = rate;  
       }
-    }
-  } //<>//
+     }
+    } //<>//
   
   void applyEffects() {}
 }
@@ -187,8 +192,8 @@ class Melonpult extends Plant{
   public Melonpult() {
     super(250,2,1,12,"Melon-pult"); 
     letter = 'M';
-    upgrades[0] = new UpgradeChain("blast",3,150,"winter",0,300);
-    upgrades[1] = new UpgradeChain("range",3,150,"rate",1,150);
+    upgrades[0] = new UpgradeChain("blast",3,150,"bigger blast size","winter",0,300,"Winter melon");
+    upgrades[1] = new UpgradeChain("range",3,150,"range increase","rate",1,150,"faster");
   } 
    
   
@@ -292,8 +297,8 @@ class Bloomerang extends Plant{
     b = new Boomerang();
     letter = 'B';
     rate = 20;
-    upgrades[0] = new UpgradeChain("range",2,75,"range",3,100);
-    upgrades[1] = new UpgradeChain("rate",4,60,"rate",3,75);
+    upgrades[0] = new UpgradeChain("range",2,75,"range increase","range",3,100,"range increase");
+    upgrades[1] = new UpgradeChain("rate",4,60,"faster","rate",3,75,"faster");
   } 
   
   boolean original() {
@@ -373,14 +378,14 @@ class Bloomerang extends Plant{
 
 class SnowPea extends Plant{  
   float slowEffect = 0.9;
-  float slowLength = 300;
+  int slowLength = 300;
   boolean spread = false;
   
   public SnowPea() {
     super(125,2,1,14,"Snow Pea");  
     letter = 'S';
-    upgrades[0] = new UpgradeChain("range",2,60,"spread",0,100);
-    upgrades[1] = new UpgradeChain("slower",40,75,"rate",3,75);
+    upgrades[0] = new UpgradeChain("range",2,60,"range increase","spread",0,100,"slow can spread");
+    upgrades[1] = new UpgradeChain("slower",40,75,"longer slow","rate",3,75,"faster");
   } 
   
   void attack() {
@@ -392,14 +397,14 @@ class SnowPea extends Plant{
         if (target != null) {
           target.takeDamage(power);  
           target.slow = slowEffect;
-          target.slowTimer = 300;
+          target.slowTimer = slowLength;
           //rect(0,0,10,10);
         }
       }
       else {
         counter = rate;  
       }
-    }  
+    }
   }
   
   
@@ -412,7 +417,21 @@ class SnowPea extends Plant{
     spread = true;  
   }
   
-  void applyEffects() {}
+  void applyEffects(Zombie z) {
+    int row = z.coords[0];
+    int col = z.coords[1];
+    for (int i = row-1; i <= row+1 && i >= 0 && i < 68; i++) {
+      for (int j = col-1; j <= col+1 && j >= 0 && j < 68; j++) {
+        
+        if ((int)(Math.random()*5) == 0) {
+          if (area[i][j].getZombies() != null && area[i][j].getZombies().size() > 0)  {
+            area[i][j].getZombies().get(0).slow = slowEffect;
+            area[i][j].getZombies().get(0).slowTimer = slowLength/2;
+          }
+        }
+      }
+    }
+  }
 }
 
 
@@ -420,8 +439,8 @@ class Repeater extends Plant{
   public Repeater() {
     super(400,0.8,2,20,"Repeater");  
     letter = 'R';
-    upgrades[0] = new UpgradeChain("range",3,110,"rate",.1,75);
-    upgrades[1] = new UpgradeChain("pierce",1,80,"power",1,200);
+    upgrades[0] = new UpgradeChain("range",3,110,"range increase","rate",.1,75);
+    upgrades[1] = new UpgradeChain("pierce",1,80,"piercing effect","power",1,200,"power increase");
     
   } 
   
@@ -442,8 +461,8 @@ class Sunflower extends Plant{
     super(150,3,0,5,"Sunflower");  
     letter = 'F';
     rate = 180;
-    upgrades[0] = new UpgradeChain("yield",15,100,"yield",20,150);
-    upgrades[1] = new UpgradeChain("rate",30,100,"yield",25,250);
+    upgrades[0] = new UpgradeChain("yield",15,100,"more sun","yield",20,150,"more sun");
+    upgrades[1] = new UpgradeChain("rate",30,100,"faster","yield",25,250,"more sun");
   } 
   
   void attack() {

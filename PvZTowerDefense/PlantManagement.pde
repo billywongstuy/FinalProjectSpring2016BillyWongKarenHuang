@@ -131,20 +131,36 @@ boolean validLocation() {
 
 void showPlant() {
   if (plantShowing != null) {
-    float x = (float)(plantShowing.range*10);
+    Plant p = plantShowing;
+    float x = (float)(p.range*10);
     fill(color(128,128,128,100));
     //need to fix the circle here for the coordinates
-    ellipse(plantShowing.x,plantShowing.y,x,x);  
+    ellipse(plantShowing.x,p.y,x,x);  
     fill(color(8,133,213));
     noStroke();
     rect(15,745,130,38);
     fill(color(0,0,0));
     textSize(26);
-    text(plantShowing.name,15,725);
-    text("Sell: " + plantShowing.cost/2,15,775);
+    text(p.name,15,725);
+    text("Sell: " + p.cost/2,15,775);
     fill(color(255,0,0));
     rect(230,690,275,110);
     rect(520,690,275,110);
+    fill(color(0,0,0));
+    if (p.upgradeStatus[0]<= 1) {
+      text(p.upgrades[0].get(p.upgradeStatus[0]).name,260,720);
+      text("cost: " + (int)(p.upgrades[0].get(p.upgradeStatus[0]).cost),260,770);
+    }
+    else {
+      text("done",260,720);  
+    }
+    if (p.upgradeStatus[1]<= 1) {
+      text(p.upgrades[1].get(p.upgradeStatus[1]).name,550,720);
+      text("cost: " + (int)(p.upgrades[1].get(p.upgradeStatus[1]).cost),550,770);
+    }
+    else {
+      text("done",550,720);  
+    }
   }
 }
 

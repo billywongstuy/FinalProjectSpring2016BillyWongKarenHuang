@@ -446,3 +446,16 @@ void plantsAttack() {
     c.p.attack();  
   }
 }
+
+void displayCosts() {
+  textSize(14);
+  fill(color(0,0,0));
+  text(new Peashooter().cost,693,145);
+  text(new Gloomshroom().cost,748,145);
+  text(new Melonpult().cost,693,226);
+  text(new Bloomerang().cost,748,226);
+  text(new SnowPea().cost,693,307);
+  text(new Repeater().cost,748,307);
+  text(new Sunflower().cost,693,388);
+  text(new Spikeweed().cost,748,388);
+}
