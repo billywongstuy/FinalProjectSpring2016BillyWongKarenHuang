@@ -91,7 +91,7 @@ void setupLevels(){
   levels[9].addZombie(10, new Football());
   levels[9].addZombie(5, new Gargantuar());
   
-  levels[10] = new Level(0);
-  levels[10].addZombie(1, new Normal());
+  //levels[10] = new Level(0);
+  //levels[10].addZombie(1, new Normal());
   
 }

@@ -11,13 +11,14 @@ PFont text;
 Plant plantChosen = null;
 Plant plantShowing = null;
 boolean surroundActive;
-int sun = 9999;  //300
-int health = 1; //200
+int sun = 300;
+int health = 200;
 List<Zombie> layout = new LinkedList<Zombie>();
-Level[] levels = new Level[11];  //set up in setupLevels()
+Level[] levels = new Level[10];  //set up in setupLevels()
 int ctr = 0;
 boolean levelStarted = false;
 float fastForward = 1;
+boolean dead = false;
 
 void setup() {
   size(800,800);
@@ -27,6 +28,11 @@ void setup() {
   bar = loadImage("../Plants/plantsbar.png");
   field = loadImage("../field.png");
   death = loadImage("../goodbyebrains.png");
+  z1 = loadImage("../Zombies/Normal.png");
+  z2 = loadImage("../Zombies/Cone.png");
+  z3 = loadImage("../Zombies/Bucket.png");
+  z4 = loadImage("../Zombies/Football.png");
+  z5 = loadImage("../Zombies/Gargantuar.png");
   image(map,0,0);
   text = loadFont("SeriesOrbit-16.vlw");
   textFont(text);
@@ -65,7 +71,7 @@ void draw() {
   if(levelStarted && frameCount % (90 * fastForward) == 0){
     levels[ctr].spawn();
   }
-  if(levelStarted && alive.isEmpty()){
+  if(!dead && levelStarted && alive.isEmpty()){
     if(frameCount % (90 * fastForward) == 0){
         sun += levels[ctr].yield;
         ctr++;
@@ -73,6 +79,7 @@ void draw() {
         fastForward = 1;
     }
   }
+  dead();
 }
 
 void mouseClicked() {
@@ -118,8 +125,9 @@ void mouseClicked() {
 }
 
 void dead(){
-  if(health == 0){
+  if(health <= 0){
     image(death,0,0);
     alive = null;
+    dead = true;
   }
 }
