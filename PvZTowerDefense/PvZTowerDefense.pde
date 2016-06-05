@@ -5,18 +5,20 @@ Square [][] area = new Square[68][68];
 PImage map;
 PImage bar;
 PImage field;
+PImage death;
+PImage z1, z2, z3, z4, z5;
 PFont text;
 Plant plantChosen = null;
 Plant plantShowing = null;
 boolean surroundActive;
-int sun = 9999;  //300
+int sun = 300;
 int health = 200;
 List<Zombie> layout = new LinkedList<Zombie>();
-Level l1,l2,l3,ltest;
-Level[] levels = new Level[4];  //set up in setupLevels()
-int ctr = 0;
+Level[] levels = new Level[10];  //set up in setupLevels()
+int ctr = 9;
 boolean levelStarted = false;
-boolean fastForward = false;
+float fastForward = 1;
+boolean dead = false;
 
 void setup() {
   size(800,800);
@@ -25,6 +27,12 @@ void setup() {
   map = loadImage("../map.png");
   bar = loadImage("../Plants/plantsbar.png");
   field = loadImage("../field.png");
+  death = loadImage("../goodbyebrains.png");
+  z1 = loadImage("../Zombies/Normal.png");
+  z2 = loadImage("../Zombies/Cone.png");
+  z3 = loadImage("../Zombies/Bucket.png");
+  z4 = loadImage("../Zombies/Football.png");
+  z5 = loadImage("../Zombies/Gargantuar.png");
   image(map,0,0);
   text = loadFont("SeriesOrbit-16.vlw");
   textFont(text);
@@ -46,7 +54,11 @@ void draw() {
   if(!levelStarted){
     text("Start Level",691,540);
   }else{
-    text("Fast Forward",681,540);
+    if(fastForward != 1){
+      text("Normal Speed",681,540);
+    }else{
+      text("Fast Forward",681,540);
+    }
   }
   showPlant();
   displayPlanted();
@@ -57,35 +69,18 @@ void draw() {
   displayZombies();
   moveZombies();
   plantsAttack();
-  if(fastForward){
-    if(levelStarted && frameCount % 45 == 0){
-      levels[ctr].spawn();
-    }
-  }else{
-    if(levelStarted && frameCount % 90 == 0){
-      //System.out.println(ctr);
-      //System.out.println(Arrays.toString(levels));
-        levels[ctr].spawn();
-    }
+  if(levelStarted && frameCount % (90 * fastForward) == 0){
+    levels[ctr].spawn();
   }
-  if(levelStarted && alive.isEmpty()){
-    if(!fastForward){
-      if(frameCount % 90 == 0){
+  if(!dead && levelStarted && alive.isEmpty()){
+    if(frameCount % (90 * fastForward) == 0){
         sun += levels[ctr].yield;
         ctr++;
         levelStarted = false;
-        fastForward = false;
-      }
-    }else{
-      if(frameCount % 45 == 0){
-        sun += levels[ctr].yield;
-        ctr++;
-        levelStarted = false;
-        fastForward = false;
-      }
+        fastForward = 1;
     }
   }
-  //System.out.println(fastForward);
+  dead();
 }
 
 void mouseClicked() {
@@ -97,10 +92,10 @@ void mouseClicked() {
   else if (mouseX >= 675 && mouseY >= 510 && mouseY <= 560){
     if(!levelStarted && ctr < levels.length){
       levelStarted = true;
-    }else if(!fastForward){
-      fastForward = true;
+    }else if(fastForward == 1){
+      fastForward = .5;
     }else{
-      fastForward = false;
+      fastForward = 1;
     }
   }
   else if (mouseX >= 670 && mouseY >= 396 && mouseY <= 690) {
@@ -132,5 +127,13 @@ void mouseClicked() {
   }
   else if (plantShowing != null && mouseX < 680 && mouseY < 680 && area[mouseY/10][mouseX/10].getPlant() != null && area[mouseY/10][mouseX/10].getPlant() != plantShowing) {
       plantShowing = area[mouseY/10][mouseX/10].getPlant(); 
+  }
+}
+
+void dead(){
+  if(health <= 0){
+    image(death,0,0);
+    alive = null;
+    dead = true;
   }
 }

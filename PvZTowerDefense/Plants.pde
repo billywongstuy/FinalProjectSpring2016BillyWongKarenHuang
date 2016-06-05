@@ -102,9 +102,8 @@ abstract class Plant {
   }
  
  
- void attack() {
-   if(fastForward){
-     if(frameCount % (int)((35*rate)/2) == 0){
+  void attack() {
+     if(frameCount % (int)((35*rate) * fastForward) == 0){
        if (counter > 0) {
         counter -= .5;
         Zombie target = null;
@@ -117,27 +116,10 @@ abstract class Plant {
           }
           //rect(0,0,10,10);
         }
-      }
-      else {
+      }else {
         counter = rate;  
       }
-     }
-   }else{
-     if (frameCount % (int)(35*rate) == 0) {
-       if (counter > 0) {
-          counter -= .5;
-          Zombie target = null;
-          target = findNearestZombie();
-          if (target != null) {
-            target.takeDamage(power);  
-            //rect(0,0,10,10);
-          }
-        }
-        else {
-          counter = rate;  
-        }
-     }
-   }
+    }
  }
  
  
@@ -177,51 +159,23 @@ class Gloomshroom extends Plant{
     upgrades[1] = new UpgradeChain("range",2,75,"range",3,75);
   } 
   
-  void attack() { //<>//
-    if(fastForward){
-      if(frameCount % (int)((35*rate)/2) == 0){
+    void attack() { //<>// //<>//
+      if(frameCount % (int)((35*rate) * fastForward) == 0){
         if (counter > 0) {
         counter -= .5;
         for (int i = -1; i <= 1; i++) {
           for (int j = -1; j <= 1; j++) {
             Zombie target = findNearestZombie(i,j);
-            int [] coords = target.coords;
             if (target != null) {
-              //target.takeDamage(power); 
-              for (int k = 0; k < pierce; k++) {
-                area[coords[0]][coords[1]].getZombies().get(k).takeDamage(power);    
-              }
+              target.takeDamage(power);  
             }
           }
         }
-      }
-      else {
+      }else{
         counter = rate;  
       }
-     }
-    }else{
-      if (frameCount % (35*rate) == 0) {
-       if (counter > 0) {
-          counter -= .5;
-          for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
-              Zombie target = findNearestZombie(i,j);
-              int [] coords = target.coords;
-              if (target != null) {
-                //target.takeDamage(power);  
-                for (int k = 0; k < pierce; k++) {
-                  area[coords[0]][coords[1]].getZombies().get(k).takeDamage(power);    
-                }
-              }
-            }
-          }
-        }
-        else {
-          counter = rate;  
-        }  
-       }
     }
-  }
+  } //<>//
   
   void applyEffects() {}
 }
@@ -236,9 +190,10 @@ class Melonpult extends Plant{
     upgrades[0] = new UpgradeChain("blast",3,150,"winter",0,300);
     upgrades[1] = new UpgradeChain("range",3,150,"rate",1,150);
   } 
+   
   
   void attack() {
-    if (frameCount % (int)(35*rate) == 0) {
+    if (frameCount % (int)((35*rate) * fastForward) == 0) {
      if (counter > 0) {
         counter -= .5;
         Zombie target = null;
@@ -391,7 +346,7 @@ class Bloomerang extends Plant{
     else {
       fill(color(0,255,0));
       rect(b.location[1]*10,b.location[0]*10,10,10);
-      if (frameCount % rate == 0) {
+      if (frameCount % (20 * fastForward) == 0) {
         moveBoom();
         fill(color(255,0,0));
         rect((b.location[1]-1)*10,(b.location[0]-1)*10,30,30);
@@ -429,8 +384,7 @@ class SnowPea extends Plant{
   } 
   
   void attack() {
-    if(fastForward){
-      if(frameCount % (int)((35*rate)/2) == 0){
+      if(frameCount % (int)((35*rate) * fastForward) == 0){
         if (counter > 0) {
         counter -= .5;
         Zombie target = null;
@@ -445,25 +399,7 @@ class SnowPea extends Plant{
       else {
         counter = rate;  
       }
-     }
-    }else{
-    if(frameCount % (int)(35*rate) == 0) {
-     if (counter > 0) {
-        counter -= .5;
-        Zombie target = null;
-        target = findNearestZombie();
-        if (target != null) {
-          target.takeDamage(power);  
-          target.slow = slowEffect;
-          target.slowTimer = 300;
-          //rect(0,0,10,10);
-        }
-      }
-      else {
-        counter = rate;  
-      }
-    }
-   }    
+    }  
   }
   
   
@@ -511,14 +447,8 @@ class Sunflower extends Plant{
   } 
   
   void attack() {
-    if(fastForward){
-      if(frameCount % rate/2 == 0){
-        sun += yield;
-      }
-    }else{
-      if (frameCount % rate == 0) {
-        sun += yield;
-      }
+    if (frameCount % (180 * fastForward) == 0) {
+      sun += yield;
     }
   }
   

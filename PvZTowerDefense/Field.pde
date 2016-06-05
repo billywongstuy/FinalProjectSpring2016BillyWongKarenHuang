@@ -352,15 +352,9 @@ void displayPlanted() {
   for (Crop c: planted) {
     fill(color(0,0,0));
     if (c.p.getClass() == new Sunflower().getClass()) {
-      if(fastForward){
-        if(frameCount % 90 == 0){
+        if(frameCount % (180 * fastForward) == 0){
           fill(color(255,255,0));
         }
-      }else{
-        if (frameCount % 180 == 0) {
-          fill(color(255,255,0));  
-        }
-      }
     }
     //rect(c.col*10,c.row*10,30,30);
     ellipse(c.col*10+15,c.row*10+15,30,30); 
@@ -377,63 +371,72 @@ void displayPlanted() {
 
 void checkZombieCond() {
   ArrayList<Zombie>toDie = new ArrayList<Zombie>();
-  for(int i = 0; i < alive.size(); i++){
-    Zombie z = alive.get(i);
-    if (z.coords[0] == 67) {
+  if(alive != null){
+    for(int i = 0; i < alive.size(); i++){
+      Zombie z = alive.get(i);
+      if (z.coords[0] == 67) {
+      }
+      if (z.health <= 0) {
+        toDie.add(z);
+      }
     }
-    if (z.health <= 0) {
-      toDie.add(z);
+    for (int j = 0; j < toDie.size(); j++) {
+      toDie.get(j).die();    
     }
-  }
-  for (int j = 0; j < toDie.size(); j++) {
-    toDie.get(j).die();    
   }
 }
 
 
 void displayZombies(){
-  for(Zombie z: alive){    
-    fill(color(1,1,1));
-    if (z.slow != 1) {
-      fill(color(0,0,250));  
+  if (alive != null){
+    for(Zombie z: alive){    
+      fill(color(1,1,1));
+      if (z.slow != 1) {
+        fill(color(0,0,250));  
+      }
+      //ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
+      //fill(color(255,255,255));
+      //text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
+      //PImage photo= loadImage("../Zombies/" + z.type + ".png");
+      //image(photo,z.coords[1]*10 - 50,z.coords[0]*10 - 70);
+      if(z.type.equals("Normal")){
+        image(z1,z.coords[1]*10 - 50,z.coords[0]*10 - 70);
+      }else if(z.type.equals("Cone")){
+        image(z2,z.coords[1]*10 - 50,z.coords[0]*10 - 70);
+      }else if(z.type.equals("Bucket")){
+        image(z3,z.coords[1]*10 - 50,z.coords[0]*10 - 70);
+      }else if(z.type.equals("Football")){
+        image(z4,z.coords[1]*10 - 50,z.coords[0]*10 - 70);
+      }else{
+        image(z5,z.coords[1]*10 - 50,z.coords[0]*10 - 70);
+      }
     }
-    //ellipse(z.coords[1]*10+5,z.coords[0]*10+5,30,30);
-    //fill(color(255,255,255));
-    //text(z.health,z.coords[1]*10+5,z.coords[0]*10+5);
-    PImage photo= loadImage("../Zombies/" + z.type + ".png");
-    image(photo,z.coords[1]*10 - 50,z.coords[0]*10 - 70);
   }
 }
 
 
 void moveZombies() {
   ArrayList<Zombie>toRemove = new ArrayList<Zombie>();
-  for (Zombie z: alive) {
-    if (z.slowTimer > 0) {
-      z.slowTimer--;  
-    }
-    if (z.slowTimer == 0) {
-      z.slow = 1;  
-    }
-    if(fastForward){
-      if(frameCount % ((50*z.slow)/2) == 0){
-        if (!z.move()) {
-          health -= z.health;
-          toRemove.add(z);
+  if(alive != null){
+    for (Zombie z: alive) {
+      if (z.slowTimer > 0) {
+        z.slowTimer--;  
+      }
+      if (z.slowTimer == 0) {
+        z.slow = 1;  
+      }
+        if(frameCount % ((50*z.slow) * fastForward) == 0){
+          if (!z.move()) {
+            health -= z.health;
+            toRemove.add(z);
         }
       }
-    }else{
-      if (frameCount % (50*z.slow) == 0) {
-        if (!z.move()) {
-          health -= z.health;
-          toRemove.add(z);
-        }
-      }  
     }
-  }
-  //System.out.println();
-  for (Zombie z: toRemove) {
-    alive.remove(alive.indexOf(z));  
+
+    //System.out.println();
+    for (Zombie z: toRemove) {
+      alive.remove(alive.indexOf(z));  
+    }
   }
 }
 
