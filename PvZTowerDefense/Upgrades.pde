@@ -54,6 +54,7 @@ class Upgrade {
      else if (stat.equals("damage")) {
        p.power += amount;  
      }
+     p.cost += cost;
      return true;  
    }
     return false;
