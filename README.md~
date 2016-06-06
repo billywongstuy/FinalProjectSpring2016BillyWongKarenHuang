@@ -1,7 +1,7 @@
 #FinalProjectSpring2016BillyWongKarenHuang #
 
 ##Team Name##
-Brainzz (We Want Them!)
+
 
 ##Project Name and Description ##
 Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
@@ -30,64 +30,44 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 ##Development Log##
 
-### 6/5/16 ###
-
--Game over screen done
-
--Restart button
-
-
-### 6/4/16 ###
-
--Implemented unique upgrades
-
--Death screen added
-
--Zombie pics now loaded in setup
-
-
-### 6/3/16 ###
-
--Finished plant upgrading process
-
--Death screen pic size fixed
-
--Restart button implemented
-
--Added more levels
-
-
+<<<<<<< HEAD
+=======
 ### 6/2/16 ###
 
 -Changed fastForward to an int (less typing!)
 
--Began work on upgrades
-
-
+>>>>>>> f16b4d73baa84f69d0acbf195392989bc8f626df
 ### 5/30/16 ###
 
 -Bloomerang (not finished)
 
 -Some bug fixes
 
--Fast forward implemented
-
+<<<<<<< HEAD
+=======
+-Fast forward fully implemented
+>>>>>>> f16b4d73baa84f69d0acbf195392989bc8f626df
 
 ### 5/27/16 ###
 
 -Melon-pults and Snow-peas
 
+<<<<<<< HEAD
+=======
 -Zombie pics are displayed
 
 -Added start button and fast forward button
-
+>>>>>>> f16b4d73baa84f69d0acbf195392989bc8f626df
 
 ### 5/26/16 ###
 
 -Sunflowers and Spikeweeds
 
+<<<<<<< HEAD
+=======
 -Sun gets added to total when level finishes/zombie dies
 
+>>>>>>> f16b4d73baa84f69d0acbf195392989bc8f626df
 
 ### 5/25/16 ###
 
@@ -100,11 +80,9 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 -Started implementing level changing
 
-
 ### 5/22/16 ###
 
 -Fixed plant range issues
-
 
 ### 5/21/16 ###
 
@@ -112,11 +90,9 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 -Fixed zombie display issue
 
-
 ### 5/20/16 ###
 
 -Worked on zombie movement
-
 
 ### 5/19/16 ###
 
@@ -124,18 +100,15 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 -Worked on plant attack (basic) (not tested yet)
 
-
 ### 5/18/16 ###
 
 -Worked on road mapping (so that zombies know where to walk)
-
 
 ### 5/17/16 ###
 
 -Started making levels
 
 -Started with zombie movement and display
-
 
 ### 5/16/16 ###
 
@@ -145,13 +118,11 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 -Started levels class
 
-
 ### 5/15/16 ###
 
 -Worked on plant placement on the map
 
 -Put in zombie subclasses
-
 
 ### 5/14/16 ###
 

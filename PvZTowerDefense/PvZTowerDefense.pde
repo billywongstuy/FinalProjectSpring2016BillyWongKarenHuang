@@ -51,7 +51,9 @@ void draw() {
   strokeWeight(4);
   noFill();
   rect(675,510,120,50);
-  if(!levelStarted){
+  if(dead){
+    text("Restart Game",681,540);
+  }else if(!levelStarted){
     text("Start Level",691,540);
   }else{
     if(fastForward != 1){
@@ -91,7 +93,12 @@ void mouseClicked() {
   }
   //675,510,120,50
   else if (mouseX >= 675 && mouseY >= 510 && mouseY <= 560){
-    if(!levelStarted && ctr < levels.length){
+    if(dead){
+      sun = 300;
+      health = 200;
+      ctr = 0;
+      dead = false;
+    }else if(!levelStarted && ctr < levels.length){
       levelStarted = true;
     }else if(fastForward == 1){
       fastForward = .5;
@@ -149,7 +156,7 @@ void mouseClicked() {
 
 void dead(){
   if(health <= 0){
-    image(death,0,0,800,800);
+    image(death,0,0,670,690);
     alive = null;
     dead = true;
   }
