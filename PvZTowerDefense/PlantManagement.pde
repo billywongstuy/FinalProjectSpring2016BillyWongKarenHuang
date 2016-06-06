@@ -103,6 +103,9 @@ void dragPlant() {
 
 
 boolean validLocation() {
+  if ((mouseX-15)/10 < 0 || (mouseY-15)/10 < 0) {
+    return false;  
+  }
   int col = mouseX/10;
   int row = mouseY/10;
   for (int i = row-1; i <= row+1 && i < 68; i++) {
