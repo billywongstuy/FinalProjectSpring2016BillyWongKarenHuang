@@ -108,11 +108,13 @@ abstract class Plant {
         counter -= .5;
         Zombie target = null;
         target = findNearestZombie();
-        int [] coords = target.coords;
         if (target != null) {
+          int [] coords = target.coords;
           //target.takeDamage(power); 
           for (int i = 0; i < pierce; i++) {
-            area[coords[0]][coords[1]].getZombies().get(i).takeDamage(power);    
+            if (area[coords[0]][coords[1]].getZombies().size() > i) {
+              area[coords[0]][coords[1]].getZombies().get(i).takeDamage(power);
+            } 
           }
           //rect(0,0,10,10);
         }
@@ -135,7 +137,6 @@ class Peashooter extends Plant{
     letter = 'P';
     upgrades[0] = new UpgradeChain("range",2,50,"range increase","range",3,75,"range increase");
     upgrades[1] = new UpgradeChain("pierce",1,100,"Piercing effect","pierce",1,80,"Pierce more");
-    System.out.println(upgrades[0].get(0).name);
   } 
   
  // void attack() {
@@ -171,7 +172,9 @@ class Gloomshroom extends Plant{
               int [] coords = target.coords;
               //target.takeDamage(power); 
               for (int k = 0; k < pierce; k++) {
-                area[coords[0]][coords[1]].getZombies().get(k).takeDamage(power);    
+                if (area[coords[0]][coords[1]].getZombies().size() > k) {
+                  area[coords[0]][coords[1]].getZombies().get(k).takeDamage(power);    
+                }
               }
             }
           }
@@ -332,13 +335,9 @@ class Bloomerang extends Plant{
       if (toHit != null) {
         bRow = y;
         bCol = x;
-        System.out.println(toHit.coords[1] + "," + toHit.coords[0]);
-        System.out.println((x-15)/10 + "," + (y-15)/10);
         float angle = solveAngle((x-15)/10,(y-15)/10,toHit.coords[1],toHit.coords[0]);
-        System.out.println("A: " + angle);
         xChange = 3*cos(angle);
         yChange = 3*sin(angle);
-        System.out.println(xChange + " " + yChange);
         if (toHit.coords[0] < (y-15)/10) {
             yChange *= -1;
         }
@@ -466,7 +465,7 @@ class Sunflower extends Plant{
   } 
   
   void attack() {
-    if (frameCount % (180 * fastForward) == 0) {
+    if (frameCount % (180 * fastForward) == 0 && levelStarted) {
       sun += yield;
     }
   }

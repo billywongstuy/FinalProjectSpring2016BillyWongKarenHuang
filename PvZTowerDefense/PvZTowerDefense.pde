@@ -11,7 +11,7 @@ PFont text;
 Plant plantChosen = null;
 Plant plantShowing = null;
 boolean surroundActive;
-int sun = 300;
+int sun = 9999;
 int health = 200;
 List<Zombie> layout = new LinkedList<Zombie>();
 Level[] levels = new Level[10];  //set up in setupLevels()

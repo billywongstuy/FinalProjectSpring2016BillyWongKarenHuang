@@ -30,6 +30,11 @@ Plants vs Zombies Tower Defense   (All trademarks belong to PopCap Games)
 
 ##Development Log##
 
+### 6/6/16 ###
+
+-Bug fixes
+
+
 ### 6/5/16 ###
 
 -Game over screen done

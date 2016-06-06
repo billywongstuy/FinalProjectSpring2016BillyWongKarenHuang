@@ -323,7 +323,7 @@ class Soil extends Square {
       }
     }
     planted.add(new Crop(p,row,col));
-    System.out.println("Planted at " + row + "," + col);
+    //System.out.println("Planted at " + row + "," + col);
     return true;
   }
   
@@ -352,7 +352,7 @@ void displayPlanted() {
   for (Crop c: planted) {
     fill(color(0,0,0));
     if (c.p.getClass() == new Sunflower().getClass()) {
-        if(frameCount % (180 * fastForward) == 0){
+        if(frameCount % (180 * fastForward) == 0 && levelStarted){
           fill(color(255,255,0));
         }
     }

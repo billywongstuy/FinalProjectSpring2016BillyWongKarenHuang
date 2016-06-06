@@ -194,6 +194,5 @@ boolean sell() {
   }
   sun += plantShowing.cost/2;
   plantShowing = null;
-  System.out.println("sell bye");
   return false;
 }
